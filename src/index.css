@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  
+  --color-sage: #4A5D4E;
+  --color-oatmeal: #F4F1EA;
+  --color-terracotta: #D46A43;
+  --color-charcoal: #1E1E1E;
+}
+
+@layer base {
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    background-color: #4A5D4E; /* sage */
+    color: #F4F1EA; /* oatmeal */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom utility for bento cards shadow and animations */
+.bento-card-shadow {
+  box-shadow: 4px 4px 0px 0px #1E1E1E;
+}
+
+.bento-card-shadow:hover {
+  box-shadow: 6px 6px 0px 0px #1E1E1E;
+}
