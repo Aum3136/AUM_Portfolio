@@ -138,7 +138,7 @@ export function ProjectCard({
               <img 
                 src={imageUrl} 
                 alt={`${title} mockup`} 
-                className="w-full h-full object-cover object-top select-none"
+                className="w-full h-full object-contain select-none bg-[#1E1E1E]"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center font-mono text-xs text-charcoal/60">
