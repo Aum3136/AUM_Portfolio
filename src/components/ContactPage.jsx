@@ -131,7 +131,7 @@ export function ContactPage({ onClose }) {
           className="flex items-center gap-2 font-mono text-xs font-bold px-3 py-1.5 border-2 border-charcoal bg-[#F4F1EA] hover:bg-charcoal hover:text-oatmeal cursor-pointer transition-all duration-200"
           style={{ boxShadow: '2px 2px 0px 0px #1E1E1E' }}
         >
-          <ArrowLeft className="w-4 h-4" /> BACK_TO_PORTFOLIO.EXE
+          <ArrowLeft className="w-4 h-4" /> BACK TO PORTFOLIO
         </button>
         <span className="font-mono text-xs text-charcoal/60 uppercase">System / Contact</span>
       </div>
@@ -145,7 +145,7 @@ export function ContactPage({ onClose }) {
             exit={{ opacity: 0 }}
           >
             <div className="mb-6 text-left">
-              <h2 className="font-serif text-4xl font-extrabold mb-2 text-charcoal">SEND_MESSAGE.LOG</h2>
+              <h2 className="font-serif text-4xl font-extrabold mb-2 text-charcoal">SEND MESSAGE </h2>
               <p className="font-sans text-sm text-charcoal/70">
                 Establish a direct link. Drop a message below, and it will be routed directly to my workspace.
               </p>
@@ -156,7 +156,7 @@ export function ContactPage({ onClose }) {
                 {/* Name Field */}
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="font-mono text-xs font-bold uppercase tracking-wider text-charcoal/80">
-                    01 / YOUR NAME
+                    01  YOUR NAME
                   </label>
                   <input
                     type="text"
@@ -174,7 +174,7 @@ export function ContactPage({ onClose }) {
                 {/* Email Field */}
                 <div className="flex flex-col gap-2">
                   <label htmlFor="email" className="font-mono text-xs font-bold uppercase tracking-wider text-charcoal/80">
-                    02 / EMAIL ADDRESS
+                    02 EMAIL ADDRESS
                   </label>
                   <input
                     type="email"
@@ -193,7 +193,7 @@ export function ContactPage({ onClose }) {
               {/* Subject Field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="subject" className="font-mono text-xs font-bold uppercase tracking-wider text-charcoal/80">
-                  03 / SUBJECT LINE
+                  03  SUBJECT LINE
                 </label>
                 <input
                   type="text"
@@ -211,7 +211,7 @@ export function ContactPage({ onClose }) {
               {/* Message Field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="message" className="font-mono text-xs font-bold uppercase tracking-wider text-charcoal/80">
-                  04 / YOUR MESSAGE
+                  04  YOUR MESSAGE
                 </label>
                 <textarea
                   id="message"
@@ -241,7 +241,7 @@ export function ContactPage({ onClose }) {
                   className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-terracotta text-oatmeal font-mono font-bold text-sm border-2 border-charcoal hover:bg-charcoal hover:text-oatmeal cursor-pointer hover:shadow-[4px_4px_0px_0px_#1E1E1E] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ boxShadow: '2px 2px 0px 0px #1E1E1E' }}
                 >
-                  <Send className="w-4 h-4" /> {sending ? 'TRANSMITTING...' : 'INITIALIZE_TRANSMISSION.BAT'}
+                  <Send className="w-4 h-4" /> {sending ? 'TRANSMITTING...' : 'INITIALIZE_TRANSMISSION '}
                 </button>
               </div>
             </form>
@@ -257,7 +257,7 @@ export function ContactPage({ onClose }) {
             <div className="w-16 h-16 rounded-full bg-terracotta border-2 border-charcoal flex items-center justify-center text-oatmeal font-bold text-2xl mb-6 shadow-[2px_2px_0px_0px_#1E1E1E]">
               <Check className="w-8 h-8" />
             </div>
-            <h3 className="font-serif text-3xl font-bold mb-4">TRANSMISSION_SUCCESSFUL.LOG</h3>
+            <h3 className="font-serif text-3xl font-bold mb-4">TRANSMISSION_SUCCESSFUL </h3>
             <p className="font-sans text-sm text-charcoal/80 max-w-md mb-8">
               Your message was sent successfully. Both email and Telegram message relays have logged the transmission details.
             </p>
@@ -266,7 +266,7 @@ export function ContactPage({ onClose }) {
               className="font-mono text-xs font-bold px-4 py-2 border-2 border-charcoal bg-[#F4F1EA] hover:bg-charcoal hover:text-oatmeal cursor-pointer transition-all duration-200"
               style={{ boxShadow: '2px 2px 0px 0px #1E1E1E' }}
             >
-              SEND_NEW_TRANSMISSION.EXE
+              SEND_NEW_TRANSMISSION 
             </button>
           </motion.div>
         )}
