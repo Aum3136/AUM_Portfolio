@@ -5,6 +5,7 @@ import { HeroCanvas } from './components/HeroCanvas';
 import { BentoGrid } from './components/BentoGrid';
 import { ContactPage } from './components/ContactPage';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   const [currentView, setCurrentView] = useState('portfolio'); // 'portfolio' | 'contact'
@@ -35,6 +36,7 @@ function App() {
           )}
         </AnimatePresence>
       </Layout>
+      <Analytics />
     </StyleProvider>
   );
 }
