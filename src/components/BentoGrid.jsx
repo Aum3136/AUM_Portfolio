@@ -86,25 +86,25 @@ export function BentoGrid({ onContactClick }) {
             <li className="flex items-start gap-3">
               <span className="w-2 h-2 mt-1.5 bg-terracotta flex-shrink-0"></span>
               <div>
-                <strong>React Three Fiber:</strong> Building physics-enabled layout shaders.
+                <strong>Asynchronous Architecture:</strong> Architecting high-throughput, event-driven systems using Node.js and event-loop optimizations.
               </div>
             </li>
             <li className="flex items-start gap-3">
               <span className="w-2 h-2 mt-1.5 bg-terracotta flex-shrink-0"></span>
               <div>
-                <strong>Neobrutalist UI/UX:</strong> Exploring high-contrast solid borders and hard shadows.
+                <strong>Algorithmic Efficiency:</strong> Deep-diving into Data Structures & Algorithms to optimize memory footprint and runtime complexity.
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="w-2 h-2 mt-1.5 bg-terracotta flex-shrink-0"></span>
+              <div>
+                <strong>Synent Tech Insights:</strong> Hardening my production code with enterprise backend patterns from my engineering internship.
               </div>
             </li>
             <li className="flex items-start gap-3">
               <span className="w-2 h-2 mt-1.5 bg-terracotta flex-shrink-0"></span>
               <div>
                 <strong>Green Tea:</strong> Specifically organic Japanese Genmaicha.
-              </div>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="w-2 h-2 mt-1.5 bg-terracotta flex-shrink-0"></span>
-              <div>
-                <strong>Local LLMs:</strong> Fine-tuning models directly on my dev rigs.
               </div>
             </li>
           </ul>
