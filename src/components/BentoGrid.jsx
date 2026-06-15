@@ -3,6 +3,11 @@ import { motion } from 'framer-motion';
 import { ProjectCard } from './ProjectCard';
 import { Coffee, Layers, Sparkles, Compass } from 'lucide-react';
 
+// Import project screenshots
+import knowbotMockup from '../assets/knowbot_mockup.png';
+import nutriscannMockup from '../assets/nutriscann_mockup.png';
+import medicoreMockup from '../assets/medicore_mockup.png';
+
 export function BentoGrid({ onContactClick }) {
   const cardTransition = { type: 'spring', stiffness: 60, damping: 15 };
   
@@ -144,6 +149,7 @@ export function BentoGrid({ onContactClick }) {
             link="https://github.com/Aum3136/KnowBot"
             index="01 / 03"
             theme="light"
+            imageUrl={knowbotMockup}
             hasTapeLeft={true}
           />
         </motion.div>
@@ -161,6 +167,7 @@ export function BentoGrid({ onContactClick }) {
             link="https://github.com/Aum3136/NutriScann"
             index="02 / 03"
             theme="dark"
+            imageUrl={nutriscannMockup}
             hasTapeRight={true}
           />
         </motion.div>
@@ -178,6 +185,7 @@ export function BentoGrid({ onContactClick }) {
             link="#"
             index="03 / 03"
             theme="accent"
+            imageUrl={medicoreMockup}
             hasTapeLeft={true}
             hasTapeRight={true}
           />
