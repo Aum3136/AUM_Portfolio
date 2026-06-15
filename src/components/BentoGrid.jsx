@@ -7,6 +7,7 @@ import { Coffee, Layers, Sparkles, Compass } from 'lucide-react';
 import knowbotMockup from '../assets/knowbot_mockup.png';
 import nutriscannMockup from '../assets/nutriscann_mockup.png';
 import medicoreMockup from '../assets/medicore_mockup.png';
+import avatarImage from '../assets/avatar.jpg';
 
 export function BentoGrid({ onContactClick }) {
   const cardTransition = { type: 'spring', stiffness: 60, damping: 15 };
@@ -41,20 +42,43 @@ export function BentoGrid({ onContactClick }) {
         className="md:col-span-2 md:row-span-2 bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between"
         style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
       >
-        <div>
-          <div className="flex items-center gap-2 mb-6 text-terracotta">
-            <Sparkles className="w-5 h-5" />
-            <span className="font-mono text-sm uppercase tracking-wider font-semibold">Dev Manifesto</span>
+        <div className="flex flex-col md:flex-row gap-8 items-start justify-between">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-6 text-terracotta">
+              <Sparkles className="w-5 h-5" />
+              <span className="font-mono text-sm uppercase tracking-wider font-semibold">Dev Manifesto</span>
+            </div>
+            <h1 className="font-serif text-4xl md:text-5xl font-black leading-tight tracking-tight mb-6 text-charcoal">
+              I build software that <span className="underline decoration-terracotta decoration-wavy decoration-3 underline-offset-4">defies gravity</span>.
+            </h1>
+            <p className="font-sans text-base leading-relaxed text-charcoal/90 mb-4">
+              Hi, I'm Aum. I don't build generic web pages, and I don't write vibe-coded AI templates. I build human-centric interactive digital spaces. My work balances at the intersection of robust engineering systems and high-comfort, organic aesthetics.
+            </p>
+            <p className="font-sans text-base leading-relaxed text-charcoal/90">
+              For me, code is physical. It should have weight, friction, and fluid dynamics. By mixing web architectures with WebGL physics, we can turn standard interfaces into responsive playgrounds.
+            </p>
           </div>
-          <h1 className="font-serif text-4xl md:text-5xl font-black leading-tight tracking-tight mb-6 text-charcoal">
-            I build software that <span className="underline decoration-terracotta decoration-wavy decoration-3 underline-offset-4">defies gravity</span>.
-          </h1>
-          <p className="font-sans text-base leading-relaxed text-charcoal/90 mb-4">
-            Hi, I'm Aum. I don't build generic web pages, and I don't write vibe-coded AI templates. I build human-centric interactive digital spaces. My work balances at the intersection of robust engineering systems and high-comfort, organic aesthetics.
-          </p>
-          <p className="font-sans text-base leading-relaxed text-charcoal/90">
-            For me, code is physical. It should have weight, friction, and fluid dynamics. By mixing web architectures with WebGL physics, we can turn standard interfaces into responsive playgrounds.
-          </p>
+          
+          {/* Polaroid Image Container */}
+          <div className="relative flex-shrink-0 mx-auto md:mx-0 mt-8 md:mt-0 rotate-[3deg] hover:rotate-0 transition-transform duration-300 select-none">
+            {/* Terracotta Tape Effect at the Top */}
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-28 h-6 bg-terracotta/90 border border-charcoal/30 -rotate-6 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.15)] z-10 flex items-center justify-center font-mono text-[9px] text-oatmeal font-bold">
+              aum_pandya.raw
+            </div>
+            {/* Polaroid Body */}
+            <div className="bg-white p-3 pb-6 border-2 border-charcoal shadow-[4px_4px_0px_0px_#1E1E1E]">
+              <div className="w-48 h-60 overflow-hidden border-2 border-charcoal bg-charcoal/10 relative">
+                <img 
+                  src={avatarImage} 
+                  alt="Aum Pandya" 
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ease-in-out" 
+                />
+              </div>
+              <div className="mt-3 font-mono text-[10px] text-charcoal/70 text-center uppercase tracking-wider font-semibold">
+                [ 22.3072° N, 73.1812° E ]
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="mt-8 flex gap-4">
