@@ -147,7 +147,7 @@ export function ContactPage({ onClose }) {
             <div className="mb-6 text-left">
               <h2 className="font-serif text-4xl font-extrabold mb-2 text-charcoal">SEND_MESSAGE.LOG</h2>
               <p className="font-sans text-sm text-charcoal/70">
-                Submit details below. If Telegram bot and Web3Forms credentials are set up, this will dispatch instantly. Otherwise, it will fallback to your local email application.
+                Establish a direct link. Drop a message below, and it will be routed directly to my workspace.
               </p>
             </div>
 
@@ -156,7 +156,7 @@ export function ContactPage({ onClose }) {
                 {/* Name Field */}
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="font-mono text-xs font-bold uppercase tracking-wider text-charcoal/80">
-                    01 // YOUR_NAME
+                    01 / YOUR NAME
                   </label>
                   <input
                     type="text"
@@ -174,7 +174,7 @@ export function ContactPage({ onClose }) {
                 {/* Email Field */}
                 <div className="flex flex-col gap-2">
                   <label htmlFor="email" className="font-mono text-xs font-bold uppercase tracking-wider text-charcoal/80">
-                    02 // EMAIL_ADDRESS
+                    02 / EMAIL ADDRESS
                   </label>
                   <input
                     type="email"
@@ -193,7 +193,7 @@ export function ContactPage({ onClose }) {
               {/* Subject Field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="subject" className="font-mono text-xs font-bold uppercase tracking-wider text-charcoal/80">
-                  03 // SUBJECT_LINE
+                  03 / SUBJECT LINE
                 </label>
                 <input
                   type="text"
@@ -211,7 +211,7 @@ export function ContactPage({ onClose }) {
               {/* Message Field */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="message" className="font-mono text-xs font-bold uppercase tracking-wider text-charcoal/80">
-                  04 // TRANSMISSION_BODY
+                  04 / YOUR MESSAGE
                 </label>
                 <textarea
                   id="message"
