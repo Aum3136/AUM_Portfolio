@@ -7,6 +7,7 @@ export function ProjectCard({
   title,
   description,
   quote,
+  highlights = [], // New prop for card content enrichment
   tags = [],
   linkText = 'VIEW ON GITHUB ↗',
   link = '#',
@@ -42,7 +43,7 @@ export function ProjectCard({
 
   return (
     <div 
-      className={`w-full h-[520px] cursor-pointer ${className}`}
+      className={`w-full h-[540px] cursor-pointer ${className}`}
       style={{ perspective: '1200px' }}
       onClick={handleCardClick}
     >
@@ -76,17 +77,29 @@ export function ProjectCard({
             </div>
 
             {/* Title & Body */}
-            <h3 className="font-serif text-3xl md:text-4xl font-extrabold tracking-tight mb-3 leading-none text-current">
+            <h3 className="font-serif text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-none text-current">
               {title}
             </h3>
             
-            <p className="font-sans text-xs md:text-sm leading-relaxed opacity-95 mb-3 line-clamp-4">
+            <p className="font-sans text-sm md:text-base leading-relaxed opacity-95 mb-4 text-current/90">
               {description}
             </p>
 
             {quote && (
-              <div className={`font-mono text-[11px] italic pl-3 border-l-2 border-current/30 py-1.5 my-3 leading-relaxed ${quoteClass}`}>
+              <div className={`font-mono text-xs md:text-sm italic pl-3 border-l-2 border-current/30 py-1.5 my-3.5 leading-relaxed ${quoteClass}`}>
                 "{quote}"
+              </div>
+            )}
+
+            {/* Highlights List */}
+            {highlights && highlights.length > 0 && (
+              <div className="mt-4 text-left">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-terracotta font-bold">Key Milestones //</span>
+                <ul className="list-disc pl-5 space-y-1 text-xs md:text-sm text-current/80 font-sans mt-1">
+                  {highlights.map((highlight, idx) => (
+                    <li key={idx}>{highlight}</li>
+                  ))}
+                </ul>
               </div>
             )}
           </div>
@@ -100,7 +113,7 @@ export function ProjectCard({
               {tags.map((tag) => (
                 <span 
                   key={tag} 
-                  className={`font-mono text-[9px] tracking-wider uppercase px-2 py-0.5 border rounded-none transition-colors duration-200 ${tagClass}`}
+                  className={`font-mono text-[11px] tracking-wider uppercase px-2.5 py-1 border rounded-none transition-colors duration-200 ${tagClass}`}
                 >
                   {tag}
                 </span>
@@ -133,12 +146,12 @@ export function ProjectCard({
           }}
         >
           {/* Mockup Landing Page/Screenshot */}
-          <div className="relative w-full h-[60%] border-2 border-charcoal bg-charcoal/10 overflow-hidden shadow-[2px_2px_0px_0px_#1E1E1E]">
+          <div className="relative w-full h-[60%] border-2 border-charcoal bg-[#1E1E1E] overflow-hidden shadow-[2px_2px_0px_0px_#1E1E1E]">
             {imageUrl ? (
               <img 
                 src={imageUrl} 
                 alt={`${title} mockup`} 
-                className="w-full h-full object-contain select-none bg-[#1E1E1E]"
+                className="w-full h-full object-contain select-none"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center font-mono text-xs text-charcoal/60">

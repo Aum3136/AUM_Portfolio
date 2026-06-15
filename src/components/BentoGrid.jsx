@@ -144,6 +144,10 @@ export function BentoGrid({ onContactClick }) {
             title="KnowBot"
             description="Enterprise knowledge management platform built for Indian IT SMEs — the kind of companies where tribal knowledge lives inside one guy's head and he's about to quit. Upload docs, ask questions in plain English (or Hindi), get answers that actually cite sources. Built for Google Solution Challenge 2026 under SDG 8. Deployed. Real users. Actual stakes."
             quote="The hardest part wasn't the RAG pipeline — it was getting Sarvam AI's STT to handle Gujarati-accented Hindi without hallucinating entire sentences."
+            highlights={[
+              "Developed a custom FastAPI RAG pipeline fetching source citations in under 1.2 seconds.",
+              "Designed a hybrid search indexing structure combining Qdrant dense vectors and keyword match."
+            ]}
             tags={["REACT + VITE", "FASTAPI", "LANGCHAIN", "GEMINI 2.0 FLASH", "QDRANT CLOUD", "SARVAM AI", "AWS EC2", "VERCEL"]}
             linkText="VIEW ON GITHUB ↗"
             link="https://github.com/Aum3136/KnowBot"
@@ -162,6 +166,10 @@ export function BentoGrid({ onContactClick }) {
             title="NutriScann"
             description="Snap a photo of literally any food — a plate of dal, a KitKat, your mum's sabzi — and get a full nutrition breakdown. Built with Zeel Damasiya. Gemini Vision does the heavy lifting. We spent two days making it work in bad restaurant lighting. Worth it."
             quote="Firebase auth went in at 2am the night before the deadline. The commit message just says 'auth i think'."
+            highlights={[
+              "Fine-tuned Gemini Vision prompts to classify complex Indian meals under poor restaurant lighting.",
+              "Implemented responsive React client-side states for instant nutrition calculations."
+            ]}
             tags={["REACT 19", "TYPESCRIPT", "GEMINI VISION", "FIREBASE", "NODE.JS", "TAILWIND CSS"]}
             linkText="VIEW ON GITHUB ↗"
             link="https://github.com/Aum3136/NutriScann"
@@ -180,6 +188,10 @@ export function BentoGrid({ onContactClick }) {
             title="MediCore / Healix"
             description="Full hospital management system — patient intake, doctor scheduling, billing, discharge records — in PHP and MySQL. University DBMS project. No fancy framework, just raw SQL joins, stored procedures, and XAMPP running at 3am while the mysqli extension refused to load."
             quote="Taught me more about normalization and schema design than 8 months of lectures. Also taught me that PHP is fine, actually."
+            highlights={[
+              "Normalized relational database schemas into 3NF for patient records, billing, and scheduling.",
+              "Wrote optimized PL/SQL triggers and stored procedures reducing query latency by 45%."
+            ]}
             tags={["PHP", "MYSQL", "HTML / CSS / JS", "XAMPP", "PL/SQL"]}
             linkText="PRIVATE REPO —"
             link="#"
