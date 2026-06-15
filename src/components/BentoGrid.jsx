@@ -135,9 +135,9 @@ export function BentoGrid({ onContactClick }) {
       </div>
 
       {/* 4. Projects Cards Grid */}
-      <div className="col-span-1 md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Card 1: KnowBot (col-span-2) */}
-        <motion.div variants={itemVariants} className="md:col-span-2">
+      <div className="col-span-1 md:col-span-3 flex flex-col gap-8">
+        {/* Card 1: KnowBot (full-width) */}
+        <motion.div variants={itemVariants} className="w-full">
           <ProjectCard 
             year="2025"
             category="AI / ENTERPRISE"
@@ -154,8 +154,8 @@ export function BentoGrid({ onContactClick }) {
           />
         </motion.div>
 
-        {/* Card 2: NutriScann (col-span-1) */}
-        <motion.div variants={itemVariants} className="md:col-span-1">
+        {/* Card 2: NutriScann (full-width) */}
+        <motion.div variants={itemVariants} className="w-full">
           <ProjectCard 
             year="2025"
             category="AI VISION - COLLAB"
@@ -172,8 +172,8 @@ export function BentoGrid({ onContactClick }) {
           />
         </motion.div>
 
-        {/* Card 3: MediCore / Healix (col-span-2) */}
-        <motion.div variants={itemVariants} className="md:col-span-2">
+        {/* Card 3: MediCore / Healix (full-width) */}
+        <motion.div variants={itemVariants} className="w-full">
           <ProjectCard 
             year="2024"
             category="DBMS - UNIVERSITY"
@@ -190,8 +190,34 @@ export function BentoGrid({ onContactClick }) {
             hasTapeRight={true}
           />
         </motion.div>
+      </div>
 
-        {/* Card 4: Balanced Info block (col-span-1) */}
+      {/* 5. Scrapbook / Skills & Philosophy (Grid system details) */}
+      <div className="col-span-1 md:col-span-3 mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Coordinates / Location */}
+        <motion.div
+          variants={itemVariants}
+          whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
+          transition={cardTransition}
+          className="bg-terracotta text-oatmeal p-8 border-2 border-charcoal flex flex-col justify-between"
+          style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
+        >
+          <div>
+            <div className="flex items-center gap-2 mb-6">
+              <Compass className="w-5 h-5 text-oatmeal" />
+              <span className="font-mono text-sm uppercase tracking-wider font-semibold text-oatmeal/90">Coordinates</span>
+            </div>
+            <h2 className="font-serif text-3xl font-bold mb-4 text-oatmeal">Location</h2>
+            <p className="font-sans text-sm leading-relaxed mb-6">
+              Operating remotely from a sunlit study in Vadodara, Gujarat, India. Available for selective engineering consultations worldwide.
+            </p>
+          </div>
+          <div className="font-mono text-xs bg-charcoal text-oatmeal p-3 border border-charcoal">
+            LAT: 22.3072° N / LON: 73.1812° E
+          </div>
+        </motion.div>
+
+        {/* Card 4: Open to Opportunities */}
         <motion.div
           variants={itemVariants}
           whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
@@ -215,37 +241,13 @@ export function BentoGrid({ onContactClick }) {
             </button>
           </div>
         </motion.div>
-      </div>
 
-      {/* 5. Scrapbook / Skills & Philosophy (Grid system details) */}
-      <div className="col-span-1 md:col-span-3 mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* System Design */}
         <motion.div
           variants={itemVariants}
           whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
           transition={cardTransition}
-          className="bg-terracotta text-oatmeal p-8 border-2 border-charcoal flex flex-col justify-between"
-          style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
-        >
-          <div>
-            <div className="flex items-center gap-2 mb-6">
-              <Compass className="w-5 h-5 text-oatmeal" />
-              <span className="font-mono text-sm uppercase tracking-wider font-semibold text-oatmeal/90">Coordinates</span>
-            </div>
-            <h2 className="font-serif text-3xl font-bold mb-4 text-oatmeal">Location</h2>
-            <p className="font-sans text-sm leading-relaxed mb-6">
-              Operating remotely from a sunlit study in Vadodara, Gujarat, India. Available for selective engineering consultations worldwide.
-            </p>
-          </div>
-          <div className="font-mono text-xs bg-charcoal text-oatmeal p-3 border border-charcoal">
-            LAT: 22.3072° N / LON: 73.1812° E
-          </div>
-        </motion.div>
-
-        <motion.div
-          variants={itemVariants}
-          whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
-          transition={cardTransition}
-          className="md:col-span-2 bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between"
+          className="bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between"
           style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
         >
           <div>
