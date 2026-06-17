@@ -55,7 +55,7 @@ export function Layout({ children, heroCanvas, onContactClick, onHomeClick }) {
             &copy; {new Date().getFullYear()} Aum Pandya. Handcrafted with React + R3F + GSAP.
           </div>
           <div className="flex gap-6">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-oatmeal transition-colors">GitHub</a>
+            <a href="https://github.com/Aum3136" target="_blank" rel="noopener noreferrer" className="hover:text-oatmeal transition-colors">GitHub</a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-oatmeal transition-colors">LinkedIn</a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-oatmeal transition-colors">Twitter</a>
           </div>
