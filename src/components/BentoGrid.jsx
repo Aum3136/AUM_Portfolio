@@ -433,44 +433,12 @@ export function BentoGrid({ onContactClick }) {
           style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
           transition={cardTransition}
         >
-          <div className="flex-1 flex flex-col">
+          <div>
             <span className="font-mono text-[10px] uppercase tracking-wider text-terracotta font-bold">STATUS</span>
             <h3 className="font-serif text-2xl font-bold mt-2 mb-4 text-charcoal">Open to Opportunities</h3>
             <p className="font-sans text-xs leading-relaxed text-charcoal/80">
               Looking for engineering positions where I can bridge WebGL, creative frontends, and robust full-stack pipelines. Let's make something memorable.
             </p>
-
-            {/* GitHub Activity Feed */}
-            <div className="relative mt-6 border-t-2 border-dashed border-charcoal/20 pt-4 flex-1">
-              <div className="absolute top-4 right-0 flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-terracotta font-semibold">
-                <span>↻ live</span>
-                <span className="w-1.5 h-1.5 bg-terracotta rounded-full animate-pulse"></span>
-              </div>
-              
-              <h4 className="font-mono text-[9px] uppercase tracking-wider text-charcoal/50 mb-3 font-semibold">
-                LATEST_COMMITS // AUM3136
-              </h4>
-              
-              {loadingCommits ? (
-                <div className="font-mono text-[10px] text-sage/80 animate-pulse">
-                  // loading logs...
-                </div>
-              ) : commitError || commits.length === 0 ? (
-                <div className="font-mono text-[10px] text-sage/80">
-                  // last seen: pushing to main
-                </div>
-              ) : (
-                <ul className="space-y-1.5 font-mono text-[10px] text-sage/95">
-                  {commits.map((commit, idx) => (
-                    <li key={idx} className="truncate leading-normal" title={`[${commit.repo}] ${commit.message} · ${commit.time}`}>
-                      <span className="font-bold text-terracotta">[{commit.repo}]</span>{' '}
-                      <span className="text-charcoal/90">{commit.message}</span>{' '}
-                      <span className="text-charcoal/50 text-[9px] block md:inline font-sans">· {commit.time}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
           </div>
           <div className="mt-6">
             <button 
@@ -504,6 +472,55 @@ export function BentoGrid({ onContactClick }) {
             <span className="px-3 py-1 bg-sage/20 border border-charcoal/20">60% Muted Sage</span>
             <span className="px-3 py-1 bg-oatmeal border border-charcoal/20">30% Oatmeal Cream</span>
             <span className="px-3 py-1 bg-terracotta text-oatmeal">10% Terracotta Orange</span>
+          </div>
+        </motion.div>
+
+        {/* Card 5: GitHub Activity Feed */}
+        <motion.div
+          variants={itemVariants}
+          whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
+          className="col-span-1 md:col-span-3 bg-oatmeal text-charcoal p-8 border-2 border-charcoal relative flex flex-col justify-between"
+          style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
+          transition={cardTransition}
+        >
+          <div>
+            <div className="flex justify-between items-center mb-4">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-terracotta font-bold">GITHUB ACTIVITY</span>
+              <div className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-terracotta font-semibold">
+                <span>↻ live</span>
+                <span className="w-1.5 h-1.5 bg-terracotta rounded-full animate-pulse"></span>
+              </div>
+            </div>
+            
+            <h3 className="font-serif text-2xl md:text-3xl font-bold mb-3 text-charcoal">Latest Repository Commits</h3>
+            <p className="font-sans text-xs text-charcoal/70 mb-6 max-w-2xl">
+              Live stream of recent pushes and commits across my active public repositories. Cached locally to preserve API rate-limits.
+            </p>
+
+            {/* Terminal Screen Container */}
+            <div className="bg-charcoal text-oatmeal p-5 border-2 border-charcoal font-mono text-xs space-y-3 relative">
+              {/* Terminal Title Bar */}
+              <div className="flex justify-between items-center border-b border-oatmeal/10 pb-2 mb-2 text-[10px] text-oatmeal/40 select-none">
+                <span>aum@antigravity:~</span>
+                <span>bash - 80x24</span>
+              </div>
+              
+              {loadingCommits ? (
+                <div className="text-oatmeal/40 animate-pulse">// loading terminal logs...</div>
+              ) : commitError || commits.length === 0 ? (
+                <div className="text-oatmeal/40">// last seen: pushing to main</div>
+              ) : (
+                <ul className="space-y-2 text-[11px] md:text-xs">
+                  {commits.map((commit, idx) => (
+                    <li key={idx} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 border-b border-oatmeal/5 pb-2 last:border-0 last:pb-0">
+                      <span className="font-bold text-terracotta shrink-0">[{commit.repo}]</span>
+                      <span className="text-oatmeal/90 flex-1 truncate">{commit.message}</span>
+                      <span className="text-oatmeal/40 text-[10px] shrink-0 font-sans">· {commit.time}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </motion.div>
       </div>
