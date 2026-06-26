@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aum Pandya — Devlog</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --color-sage: #4A5C4E;
+      --color-oatmeal: #F5F0E8;
+      --color-terracotta: #C1502A;
+      --color-charcoal: #1E1E1E;
+      
+      --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-mono: 'Courier New', Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header Nav */
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.15);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background-color: var(--color-terracotta);
+      border: 2px solid var(--color-charcoal);
+      color: var(--color-oatmeal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--color-terracotta);
+    }
+
+    .nav-link.active {
+      color: var(--color-terracotta);
+      border-bottom: 2px solid var(--color-terracotta);
+      padding-bottom: 2px;
+    }
+
+    .cta-button {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-terracotta);
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-charcoal);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background-color: var(--color-charcoal);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 4rem 0;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.15);
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-terracotta);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      max-width: 800px;
+    }
+
+    .hero-subtext {
+      font-size: 1.1rem;
+      color: rgba(245, 240, 232, 0.8);
+      max-width: 600px;
+    }
+
+    /* Main Content Listing */
+    main {
+      flex: 1;
+      padding: 4rem 0;
+    }
+
+    .blog-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Blog Card */
+    .blog-card {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-charcoal);
+      border-radius: 0; /* brutalist */
+      padding: 2.25rem 2rem;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    /* Terracotta Left Border Pseudo-element */
+    .blog-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      bottom: -2px;
+      left: 0;
+      width: 3px;
+      background-color: var(--color-terracotta);
+      transition: transform 0.2s ease;
+    }
+
+    .blog-card:hover::before {
+      transform: translateX(-4px); /* left shift of 4px */
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-date {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: var(--color-charcoal);
+      opacity: 0.6;
+    }
+
+    .card-category {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: var(--color-terracotta);
+      letter-spacing: 0.05em;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .card-excerpt {
+      font-size: 0.95rem;
+      color: rgba(30, 30, 30, 0.85);
+      margin-bottom: 1.5rem;
+    }
+
+    .read-more-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--color-terracotta);
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .read-more-link:hover {
+      transform: translateX(4px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--color-sage);
+      padding: 3rem 0;
+      border-top: 1px solid rgba(245, 240, 232, 0.15);
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(245, 240, 232, 0.5);
+      letter-spacing: 0.1em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-title {
+        font-size: 2.25rem;
+      }
+
+      .card-title {
+        font-size: 1.5rem;
+      }
+
+      .blog-card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <div class="logo-badge">α</div>
+        AUM PANDYA — MY PORTFOLIO
+      </a>
+      <nav>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#projects" class="nav-link">Projects</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="index.html#contact" class="cta-button">Get In Touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <span class="hero-label">[ DEVLOG // FIELD NOTES FROM THE BUILD ]</span>
+      <h1 class="hero-title">Writing from the trenches.</h1>
+      <p class="hero-subtext">No tutorials. No fluff. Just what actually happened when I tried to ship something real.</p>
+    </div>
+  </section>
+
+  <!-- Main Content Listing -->
+  <main>
+    <div class="container">
+      <div class="blog-list">
+        
+        <!-- Post 1 -->
+        <article class="blog-card">
+          <div class="card-meta">
+            <span class="card-date">JUN 2026</span>
+            <span class="card-category">FULLSTACK</span>
+          </div>
+          <h2 class="card-title">How I Built Shared Table-Ordering with Polling</h2>
+          <p class="card-excerpt">No WebSockets. No magic. Just setInterval, a shared session token, and a lot of edge cases I didn't expect at 2am.</p>
+          <a href="#post-1" class="read-more-link">READ POST →</a>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="blog-card">
+          <div class="card-meta">
+            <span class="card-date">MAY 2026</span>
+            <span class="card-category">BACKEND</span>
+          </div>
+          <h2 class="card-title">Hardening NutriScann for Production</h2>
+          <p class="card-excerpt">Firebase Admin middleware, Zod validation, Cloudinary storage, rate limiting — what Phase 1 of a real security overhaul actually looks like.</p>
+          <a href="#post-2" class="read-more-link">READ POST →</a>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="blog-card">
+          <div class="card-meta">
+            <span class="card-date">APR 2026</span>
+            <span class="card-category">AI / ML</span>
+          </div>
+          <h2 class="card-title">Getting Sarvam AI's STT to Handle Gujarati-Accented Hindi</h2>
+          <p class="card-excerpt">Building KnowBot taught me that Indian-language STT is not a solved problem. Here's every workaround I found.</p>
+          <a href="#post-3" class="read-more-link">READ POST →</a>
+        </article>
+
+        <!-- Post 4 -->
+        <article class="blog-card">
+          <div class="card-meta">
+            <span class="card-date">MAR 2026</span>
+            <span class="card-category">DEVLOG</span>
+          </div>
+          <h2 class="card-title">What Shipping a SaaS at ₹499/Month Taught Me</h2>
+          <p class="card-excerpt">Cafe Software was supposed to take 2 weeks. It took much longer. Here's the honest breakdown of every decision.</p>
+          <a href="#post-4" class="read-more-link">READ POST →</a>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-text">// AUM PANDYA · DEVLOG · 2025</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -35,6 +35,14 @@ export function Layout({ children, heroCanvas, onContactClick, onHomeClick }) {
             >
               Projects
             </a>
+            <a 
+              href="/blog.html" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-terracotta transition-colors duration-200"
+            >
+              Blog
+            </a>
             <button 
               onClick={onContactClick} 
               className="px-4 py-2 bg-terracotta text-oatmeal border-2 border-charcoal shadow-[2px_2px_0px_0px_#1E1E1E] hover:shadow-[4px_4px_0px_0px_#1E1E1E] hover:-translate-x-[2px] hover:-translate-y-[2px] cursor-pointer transition-all duration-200 active:translate-x-0 active:translate-y-0"
