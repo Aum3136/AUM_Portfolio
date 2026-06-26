@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ProjectCard } from './ProjectCard';
+import { CurrentlyBuildingCard } from './CurrentlyBuildingCard';
 import { Coffee, Layers, Sparkles, Compass } from 'lucide-react';
+
+function timeAgo(dateString) {
+  const now = new Date();
+  const date = new Date(dateString);
+  const seconds = Math.floor((now - date) / 1000);
+  
+  if (seconds < 60) return 'just now';
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}
 
 // Import project screenshots
 import knowbotMockup from '../assets/knowbot_mockup.png';
@@ -11,6 +26,97 @@ import avatarImage from '../assets/avatar.jpg';
 
 export function BentoGrid({ onContactClick }) {
   const cardTransition = { type: 'spring', stiffness: 60, damping: 15 };
+  
+  const [commits, setCommits] = useState([]);
+  const [loadingCommits, setLoadingCommits] = useState(true);
+  const [commitError, setCommitError] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchCommits() {
+      try {
+        const cacheKey = 'github_commits_cache_v2';
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+          const { timestamp, data } = JSON.parse(cached);
+          if (Date.now() - timestamp < 900000) { // 15 mins
+            if (isMounted) {
+              setCommits(data);
+              setLoadingCommits(false);
+            }
+            return;
+          }
+        }
+
+        const eventsRes = await fetch('https://api.github.com/users/Aum3136/events');
+        if (!eventsRes.ok) throw new Error('Events API error');
+        const events = await eventsRes.json();
+        
+        const pushEvents = events.filter(e => e.type === 'PushEvent').slice(0, 5);
+        if (pushEvents.length === 0) {
+          throw new Error('No push events found');
+        }
+
+        const commitPromises = pushEvents.map(async (event) => {
+          const repoName = event.repo.name;
+          const headSha = event.payload.head;
+          const cleanRepo = repoName.replace('Aum3136/', '');
+          
+          try {
+            const commitRes = await fetch(`https://api.github.com/repos/${repoName}/commits/${headSha}`);
+            if (!commitRes.ok) {
+              return {
+                repo: cleanRepo,
+                message: 'Pushed updates to main',
+                time: timeAgo(event.created_at)
+              };
+            }
+            const commitData = await commitRes.json();
+            return {
+              repo: cleanRepo,
+              message: commitData.commit.message.split('\n')[0],
+              time: timeAgo(event.created_at)
+            };
+          } catch (e) {
+            return {
+              repo: cleanRepo,
+              message: 'Pushed updates to main',
+              time: timeAgo(event.created_at)
+            };
+          }
+        });
+
+        const fetchedCommits = await Promise.all(commitPromises);
+        if (isMounted) {
+          setCommits(fetchedCommits);
+          localStorage.setItem(cacheKey, JSON.stringify({
+            timestamp: Date.now(),
+            data: fetchedCommits
+          }));
+        }
+      } catch (err) {
+        console.error('Error fetching GitHub activity:', err);
+        if (isMounted) {
+          setCommitError(true);
+          const cached = localStorage.getItem('github_commits_cache_v2');
+          if (cached) {
+            const { data } = JSON.parse(cached);
+            setCommits(data);
+            setCommitError(false);
+          }
+        }
+      } finally {
+        if (isMounted) {
+          setLoadingCommits(false);
+        }
+      }
+    }
+
+    fetchCommits();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
   
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -144,6 +250,72 @@ export function BentoGrid({ onContactClick }) {
         </div>
       </motion.div>
 
+      {/* 2.5 Currently Shipping Section Header & Strip */}
+      <div className="col-span-1 md:col-span-3 mt-16 mb-2">
+        <div className="flex items-center gap-4 mb-2">
+          <h2 className="font-mono text-sm md:text-base text-terracotta font-bold tracking-widest uppercase">
+            [ 02 // CURRENTLY SHIPPING ]
+          </h2>
+          <div className="flex-1 h-0.5 bg-oatmeal/20"></div>
+        </div>
+        <p className="text-oatmeal/75 text-xs font-mono mb-6 uppercase tracking-widest">
+          Active builds · Click cards to view technical specs
+        </p>
+      </div>
+
+      <div className="col-span-1 md:col-span-3 flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-none w-full pb-6 md:pb-0">
+        <div className="w-[85vw] md:w-full shrink-0 snap-start snap-always">
+          <CurrentlyBuildingCard
+            title="Cafe Software"
+            description="Multi-tenant café ordering SaaS, targeting Vadodara cafes."
+            status="Live"
+            tags={["React + Vite + TS", "Node/Express", "SQLite", "Railway"]}
+            link="cafe-software.vercel.app"
+            metrics={{
+              tier: "Multi-Tenant SaaS",
+              pricing: "₹499/month",
+              database: "SQLite (WAL Mode)",
+              hosting: "Railway",
+              region: "BOM (Mumbai)"
+            }}
+          />
+        </div>
+        
+        <div className="w-[85vw] md:w-full shrink-0 snap-start snap-always">
+          <CurrentlyBuildingCard
+            title="NutriScann"
+            description="AI nutrition tracker using Gemini Vision to scan meals."
+            status="In Progress"
+            tags={["React 19", "TypeScript", "Firebase Auth", "Node/Express"]}
+            link="#"
+            metrics={{
+              tier: "Collab Beta",
+              vision: "Gemini Vision API",
+              auth: "Firebase Auth",
+              backend: "Node/Express",
+              status: "Localhost Development"
+            }}
+          />
+        </div>
+        
+        <div className="w-[85vw] md:w-full shrink-0 snap-start snap-always">
+          <CurrentlyBuildingCard
+            title="KnowBot"
+            description="Enterprise RAG knowledge platform for Indian IT SMEs."
+            status="Live"
+            tags={["FastAPI", "LangChain", "Gemini 2.0 Flash", "Qdrant", "AWS EC2"]}
+            link="knowbot3136.vercel.app"
+            metrics={{
+              tier: "Enterprise RAG",
+              database: "Qdrant Vector DB",
+              engine: "FastAPI + LangChain",
+              llm: "Gemini 2.0 Flash",
+              infrastructure: "AWS EC2"
+            }}
+          />
+        </div>
+      </div>
+
       {/* 3. Project Showcase Header */}
       <div className="col-span-1 md:col-span-3 mt-16 mb-2">
         <div className="flex items-center gap-4 mb-2">
@@ -261,12 +433,44 @@ export function BentoGrid({ onContactClick }) {
           style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
           transition={cardTransition}
         >
-          <div>
+          <div className="flex-1 flex flex-col">
             <span className="font-mono text-[10px] uppercase tracking-wider text-terracotta font-bold">STATUS</span>
             <h3 className="font-serif text-2xl font-bold mt-2 mb-4 text-charcoal">Open to Opportunities</h3>
             <p className="font-sans text-xs leading-relaxed text-charcoal/80">
               Looking for engineering positions where I can bridge WebGL, creative frontends, and robust full-stack pipelines. Let's make something memorable.
             </p>
+
+            {/* GitHub Activity Feed */}
+            <div className="relative mt-6 border-t-2 border-dashed border-charcoal/20 pt-4 flex-1">
+              <div className="absolute top-4 right-0 flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-terracotta font-semibold">
+                <span>↻ live</span>
+                <span className="w-1.5 h-1.5 bg-terracotta rounded-full animate-pulse"></span>
+              </div>
+              
+              <h4 className="font-mono text-[9px] uppercase tracking-wider text-charcoal/50 mb-3 font-semibold">
+                LATEST_COMMITS // AUM3136
+              </h4>
+              
+              {loadingCommits ? (
+                <div className="font-mono text-[10px] text-sage/80 animate-pulse">
+                  // loading logs...
+                </div>
+              ) : commitError || commits.length === 0 ? (
+                <div className="font-mono text-[10px] text-sage/80">
+                  // last seen: pushing to main
+                </div>
+              ) : (
+                <ul className="space-y-1.5 font-mono text-[10px] text-sage/95">
+                  {commits.map((commit, idx) => (
+                    <li key={idx} className="truncate leading-normal" title={`[${commit.repo}] ${commit.message} · ${commit.time}`}>
+                      <span className="font-bold text-terracotta">[{commit.repo}]</span>{' '}
+                      <span className="text-charcoal/90">{commit.message}</span>{' '}
+                      <span className="text-charcoal/50 text-[9px] block md:inline font-sans">· {commit.time}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
           <div className="mt-6">
             <button 
