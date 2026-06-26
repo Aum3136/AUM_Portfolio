@@ -44,3 +44,22 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* OSS left panel border shift on hover */
+.oss-left-panel {
+  position: relative;
+  border-radius: 0px;
+}
+.oss-left-panel::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: 0;
+  width: 3px;
+  background-color: #C1502A; /* Terracotta */
+  transition: transform 0.2s ease;
+}
+.oss-left-panel:hover::before {
+  transform: translateX(-4px); /* Shifts border left by 4px */
+}

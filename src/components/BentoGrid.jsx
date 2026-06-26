@@ -400,6 +400,88 @@ export function BentoGrid({ onContactClick }) {
         </motion.div>
       </div>
 
+      {/* 4.5 Open Source Section */}
+      <div className="col-span-1 md:col-span-3 mt-16 mb-2">
+        <div className="flex items-center gap-4 mb-2">
+          <h2 className="font-mono text-sm md:text-base text-terracotta font-bold tracking-widest uppercase">
+            [ OSS // OPEN SOURCE ]
+          </h2>
+          <div className="flex-1 h-0.5 bg-oatmeal/20"></div>
+        </div>
+        <p className="text-oatmeal/75 text-xs font-mono mb-6 uppercase tracking-widest">
+          Public contributions · Community initiatives
+        </p>
+      </div>
+
+      <motion.div 
+        variants={itemVariants}
+        className="col-span-1 md:col-span-3 flex flex-col md:flex-row gap-6 w-full"
+      >
+        {/* Left Panel: Contribution Card */}
+        <div className="w-full md:w-[65%] oss-left-panel p-8 border-2 border-charcoal bg-oatmeal text-charcoal flex flex-col justify-between">
+          <div>
+            <div className="flex justify-between items-center mb-4">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-terracotta font-bold">
+                CONTRIBUTION #01
+              </span>
+              <span className="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 border border-charcoal text-charcoal font-bold bg-[#EFECE3]">
+                OPEN
+              </span>
+            </div>
+            
+            <h3 className="font-serif text-3xl font-extrabold mb-1 text-charcoal">
+              AirDrawer
+            </h3>
+            
+            <div className="font-mono text-xs text-charcoal/50 mb-4 select-all">
+              github.com/AirDrawer/airdrawer
+            </div>
+            
+            <p className="font-sans text-sm leading-relaxed text-charcoal/85 mb-6">
+              AirDrawer is an open-source gesture-based drawing tool using MediaPipe Hands and WebGL. Contributed to the React + Vite frontend — worked on gesture detection pipeline and canvas rendering logic.
+            </p>
+          </div>
+          
+          <div className="mt-auto border-t border-charcoal/10 pt-4 flex flex-wrap justify-between items-center gap-4">
+            <div className="flex flex-wrap gap-1.5">
+              {["REACT", "VITE", "MEDIAPIPE", "WEBGL"].map((tag) => (
+                <span 
+                  key={tag} 
+                  className="font-mono text-[9px] tracking-wider uppercase px-2.5 py-1 border border-charcoal/20 bg-charcoal/5 text-charcoal/80"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            
+            <a 
+              href="https://github.com/Aum3136/AirDrawer" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="font-mono text-xs font-bold text-terracotta hover:underline flex items-center gap-1"
+            >
+              VIEW ON GITHUB →
+            </a>
+          </div>
+        </div>
+
+        {/* Right Panel: Commitment Statement Card */}
+        <div className="w-full md:w-[35%] bg-[#4A5C4E] text-oatmeal p-8 border-2 border-charcoal flex flex-col justify-between rounded-none">
+          <div>
+            <span className="font-mono text-[9px] uppercase tracking-wider text-oatmeal/60 block mb-6">
+              // CONTRIBUTOR MINDSET
+            </span>
+            <p className="font-serif text-lg md:text-xl italic leading-relaxed text-oatmeal/95 mb-6">
+              "One contribution in. This is just the start.<br /><br />
+              I plan to go deeper — bug fixes, feature PRs, documentation, and eventually maintaining something others depend on. Open source is how I intend to earn credibility the honest way."
+            </p>
+          </div>
+          <div className="mt-auto border-t border-oatmeal/20 pt-4 font-mono text-[9px] text-oatmeal/50 uppercase tracking-wider">
+            Next target: find a repo I use daily and fix something that's been bothering me.
+          </div>
+        </div>
+      </motion.div>
+
       {/* 5. Scrapbook / Skills & Philosophy (Grid system details) */}
       <div className="col-span-1 md:col-span-3 mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Coordinates / Location */}
