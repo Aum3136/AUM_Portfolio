@@ -347,6 +347,7 @@ export function BentoGrid({ onContactClick }) {
             tags={["REACT + VITE", "FASTAPI", "LANGCHAIN", "GEMINI 2.0 FLASH", "QDRANT CLOUD", "SARVAM AI", "AWS EC2", "VERCEL"]}
             linkText="VIEW ON GITHUB ↗"
             link="https://github.com/Aum3136/KnowBot"
+            caseStudyLink="knowbot.html"
             index="01 / 03"
             theme="light"
             imageUrl={knowbotMockup}
@@ -369,6 +370,7 @@ export function BentoGrid({ onContactClick }) {
             tags={["REACT 19", "TYPESCRIPT", "GEMINI VISION", "FIREBASE", "NODE.JS", "TAILWIND CSS"]}
             linkText="VIEW ON GITHUB ↗"
             link="https://github.com/Aum3136/NutriScann"
+            caseStudyLink="nutriscan.html"
             index="02 / 03"
             theme="dark"
             imageUrl={nutriscannMockup}

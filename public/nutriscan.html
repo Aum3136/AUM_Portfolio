@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriScann Case Study — Aum Pandya</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+    :root {
+      --color-sage: #4a5c4e;
+      --color-oatmeal: #f5f0e8;
+      --color-terracotta: #c1502a;
+      --color-charcoal: #1e1e1e;
+      
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-mono: 'Courier New', Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header Nav */
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.15);
+      background-color: var(--color-sage);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--color-terracotta);
+      border: 2px solid var(--color-charcoal);
+      color: var(--color-oatmeal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border-radius: 2px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--color-terracotta);
+    }
+
+    .cta-button {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-terracotta);
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-charcoal);
+      border-radius: 2px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background-color: var(--color-charcoal);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      padding: 5rem 0;
+      border-bottom: 2px solid var(--color-charcoal);
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--color-terracotta);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .hero-badge-row {
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-terracotta);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: rgba(245, 240, 232, 0.9);
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-primary {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 0.85rem 1.75rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      transition: all 0.2s ease;
+      background-color: var(--color-terracotta);
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-charcoal);
+    }
+
+    .cta-primary:hover {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+    }
+
+    .stack-tags-row {
+      border-top: 1px solid rgba(245, 240, 232, 0.2);
+      padding-top: 1.5rem;
+    }
+
+    .stack-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(245, 240, 232, 0.5);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .stack-tags {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      color: var(--color-oatmeal);
+      line-height: 1.8;
+    }
+
+    /* Section styling */
+    section.details-section {
+      padding: 6rem 0;
+      border-bottom: 2px solid var(--color-charcoal);
+    }
+
+    section.bg-oatmeal {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+    }
+
+    section.bg-sage {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      border-bottom: 2px solid var(--color-oatmeal);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .bg-oatmeal .section-label {
+      color: var(--color-terracotta);
+    }
+
+    .bg-sage .section-label {
+      color: var(--color-oatmeal);
+      opacity: 0.8;
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Section 1 Layout */
+    .problem-layout {
+      display: flex;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .problem-text {
+      flex: 1.2;
+      min-width: 320px;
+    }
+
+    .problem-text p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: rgba(30, 30, 30, 0.9);
+    }
+
+    .stat-block {
+      flex: 0.8;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      background-color: rgba(30, 30, 30, 0.03);
+      padding: 2.5rem;
+      border: 2px solid var(--color-charcoal);
+      border-radius: 2px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 900;
+      color: var(--color-terracotta);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--color-charcoal);
+      letter-spacing: 0.05em;
+    }
+
+    /* Section 2 Architecture Diagrams Layout */
+    .arch-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+
+    .arch-section-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--color-terracotta);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .arch-diagram-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+
+    /* Diagram 1: Full-stack Pipeline Grid */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: 2fr 80px 2fr 80px 2fr;
+      grid-template-rows: auto 40px auto 40px auto 40px auto 40px auto;
+      gap: 0;
+      align-items: center;
+      justify-items: center;
+      min-width: 800px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      border: 2px solid var(--color-oatmeal);
+      background-color: rgba(245, 240, 232, 0.04);
+      border-radius: 2px;
+    }
+
+    .arch-box {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-charcoal);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 1rem 1rem;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+    }
+
+    .arch-box.accent-box {
+      border-color: var(--color-terracotta);
+      background-color: var(--color-oatmeal);
+      color: var(--color-terracotta);
+      border-width: 3px;
+    }
+
+    .arch-arrow {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--color-terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arch-arrow-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--color-oatmeal);
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+      text-align: center;
+    }
+
+    .arch-arrow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arch-arrow-mobile {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--color-terracotta);
+      margin: 0.5rem 0;
+      text-align: center;
+    }
+
+    /* Diagram 2: Middleware Stack Chain */
+    .middleware-chain {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 350px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      border: 2px solid var(--color-oatmeal);
+      background-color: rgba(245, 240, 232, 0.04);
+      border-radius: 2px;
+    }
+
+    .middleware-box {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-charcoal);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 0.75rem 1.25rem;
+      text-align: center;
+      width: 100%;
+      border-radius: 2px;
+    }
+
+    .middleware-box.handler-box {
+      border-color: var(--color-terracotta);
+      color: var(--color-terracotta);
+      border-width: 3px;
+    }
+
+    /* Section 3 Layout */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .challenge-card {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-charcoal);
+      border-left: 4px solid var(--color-terracotta);
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      border-radius: 2px;
+      min-height: 280px;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-terracotta);
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(30, 30, 30, 0.85);
+    }
+
+    /* Section 4 Phase Tracker */
+    .phase-tracker {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 750px;
+      margin: 2.5rem auto 0 auto;
+    }
+
+    .phase-item {
+      display: flex;
+      border: 2px solid var(--color-oatmeal);
+      padding: 2rem;
+      border-radius: 2px;
+      gap: 2rem;
+      align-items: flex-start;
+      background-color: rgba(245, 240, 232, 0.02);
+    }
+
+    .phase-item.complete {
+      background-color: rgba(193, 80, 42, 0.05); /* very subtle terracotta tint */
+      border-color: var(--color-terracotta);
+    }
+
+    .phase-item.in-progress {
+      background-color: rgba(245, 240, 232, 0.06);
+      border-color: var(--color-oatmeal);
+    }
+
+    .phase-item.pending {
+      opacity: 0.45;
+      border-color: rgba(245, 240, 232, 0.3);
+    }
+
+    .phase-icon {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      line-height: 1;
+      width: 2rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .phase-icon.complete-icon {
+      color: var(--color-terracotta);
+    }
+
+    .phase-icon.in-progress-icon {
+      color: var(--color-oatmeal);
+    }
+
+    .phase-content {
+      flex: 1;
+    }
+
+    .phase-title {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .phase-title span.status-label {
+      font-size: 0.75rem;
+      padding: 0.1rem 0.5rem;
+      border: 1px solid currentColor;
+      border-radius: 2px;
+    }
+
+    .phase-details {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(245, 240, 232, 0.85);
+    }
+
+    /* Section 5 Layout */
+    .retro-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      max-width: 850px;
+    }
+
+    .retro-item {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-charcoal);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .retro-arrow {
+      color: var(--color-terracotta);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      padding: 5rem 0 3rem 0;
+      border-top: 2px solid var(--color-charcoal);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.15);
+      padding-bottom: 2.5rem;
+    }
+
+    .footer-link {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link.back-link {
+      color: var(--color-terracotta);
+    }
+
+    .footer-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(245, 240, 232, 0.5);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1.5rem 0;
+      }
+      .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .hero-title {
+        font-size: 2.75rem;
+      }
+      .hero-tagline {
+        font-size: 1.1rem;
+      }
+      section.details-section {
+        padding: 4rem 0;
+      }
+      .section-heading {
+        font-size: 2.25rem;
+        margin-bottom: 2rem;
+      }
+      .problem-layout {
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+      .stat-block {
+        padding: 1.75rem;
+      }
+
+      /* Stacking architecture pipeline grid on mobile */
+      .pipeline-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        min-width: unset;
+        width: 100%;
+        padding: 1.5rem 1rem;
+      }
+      .pipeline-grid > .arch-arrow-container, 
+      .pipeline-grid > .arch-arrow {
+        display: none;
+      }
+      .arch-arrow-mobile {
+        display: block;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <div class="logo-badge">α</div>
+        AUM PANDYA — MY PORTFOLIO
+      </a>
+      <nav>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#projects" class="nav-link">Projects</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="index.html#contact" class="cta-button">Get In Touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <span class="hero-label">PROJECT DEEP DIVE // 02</span>
+      
+      <div class="hero-badge-row">
+        <span class="hero-badge">🔨 IN PRODUCTION HARDENING</span>
+      </div>
+
+      <h1 class="hero-title">NutriScann</h1>
+      
+      <p class="hero-tagline">
+        AI-powered nutrition analysis that actually takes security seriously.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#" class="cta-primary">VIEW GITHUB →</a>
+      </div>
+
+      <div class="stack-tags-row">
+        <span class="stack-label">TECHNOLOGY STACK</span>
+        <div class="stack-tags">
+          REACT 19 · TYPESCRIPT · FIREBASE AUTH · GEMINI AI · EXPRESS 5 · MONGOOSE · CLOUDINARY · FRAMER MOTION · RECHARTS · ZOD · RAILWAY · VERCEL
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: The Problem -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 01 · THE PROBLEM</span>
+      <h2 class="section-heading">Nutrition apps lie with confidence.</h2>
+      
+      <div class="problem-layout">
+        <div class="problem-text">
+          <p>
+            Most nutrition trackers ask you to manually log food. Nobody does that for more than three days. NutriScann takes a photo, sends it to Gemini Vision, and gets back a full macronutrient breakdown — no barcode scanning, no database lookup, no manual entry.
+          </p>
+          <p>
+            The hard part wasn't the AI. It was making the system production-safe: auth that can't be bypassed, data that's scoped to the user, images that don't bloat your database, and an API that doesn't collapse under a free-tier Railway instance.
+          </p>
+        </div>
+        
+        <div class="stat-block">
+          <div class="stat-item">
+            <span class="stat-number">Phase 1</span>
+            <span class="stat-label">security overhaul complete</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">0 bytes</span>
+            <span class="stat-label">base64 images in MongoDB (moved to Cloudinary)</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5 layers</span>
+            <span class="stat-label">of hardening: auth, validation, rate limiting, CORS, helmet</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Architecture -->
+  <section class="details-section bg-sage">
+    <div class="container">
+      <span class="section-label">// 02 · SYSTEM ARCHITECTURE</span>
+      <h2 class="section-heading">Full-stack, locked down.</h2>
+
+      <div class="arch-container">
+        <!-- Part A: Pipeline -->
+        <div>
+          <h3 class="arch-section-subtitle">// Data Flow &amp; Infrastructure</h3>
+          <div class="arch-diagram-wrapper">
+            <div class="pipeline-grid">
+              <!-- Desktop Grid layout -->
+              
+              <!-- Row 1: User to FE -->
+              <div class="arch-box" style="grid-column: 3; grid-row: 1;">USER</div>
+              
+              <!-- Mobile arrow USER to FRONTEND -->
+              <div class="arch-arrow-mobile" style="order: 1;">⬇ (food photo)</div>
+
+              <div class="arch-arrow-container" style="grid-column: 3; grid-row: 2; height: 40px;">
+                <span class="arch-arrow-label">uploads food photo</span>
+                <div class="arch-arrow">⬇</div>
+              </div>
+              
+              <!-- Row 2: Frontend -->
+              <div class="arch-box" style="grid-column: 3; grid-row: 3;">REACT 19 + VITE FRONTEND (Vercel)</div>
+              
+              <!-- Mobile arrow FRONTEND to Firebase -->
+              <div class="arch-arrow-mobile" style="order: 2;">⬇ (credentials)</div>
+
+              <div class="arch-arrow-container" style="grid-column: 3; grid-row: 4; height: 40px;">
+                <span class="arch-arrow-label">Firebase Auth ID Token</span>
+                <div class="arch-arrow">⬇</div>
+              </div>
+
+              <!-- Row 3: Express Backend -->
+              <div class="arch-box accent-box" style="grid-column: 3; grid-row: 5;">EXPRESS 5 BACKEND (Railway)</div>
+
+              <!-- Mobile arrow BACKEND to services -->
+              <div class="arch-arrow-mobile" style="order: 3;">⬇ (API requests)</div>
+
+              <!-- Row 4: Split arrows from Express BE to DB and Gemini -->
+              <div class="arch-arrow-container" style="grid-column: 1; grid-row: 6; height: 40px;">
+                <div class="arch-arrow">⬇</div>
+              </div>
+              <div class="arch-arrow-container" style="grid-column: 5; grid-row: 6; height: 40px;">
+                <div class="arch-arrow">⬇</div>
+              </div>
+
+              <!-- Row 5: Relational and AI layers -->
+              <div class="arch-box" style="grid-column: 1; grid-row: 7;">MONGOOSE + MONGODB ATLAS</div>
+              <div class="arch-box" style="grid-column: 5; grid-row: 7;">GEMINI AI VISION</div>
+
+              <!-- Mobile arrow MongoDB to Cloudinary -->
+              <div class="arch-arrow-mobile" style="order: 4;">⬇ (image URL references)</div>
+              <!-- Mobile arrow Gemini to JSON -->
+              <div class="arch-arrow-mobile" style="order: 5;">⬇ (extract nutrition data)</div>
+
+              <!-- Row 6: Connecting to Cloudinary / Nutrition JSON -->
+              <div class="arch-arrow-container" style="grid-column: 1; grid-row: 8; height: 40px;">
+                <div class="arch-arrow">⬇</div>
+              </div>
+              <div class="arch-arrow-container" style="grid-column: 5; grid-row: 8; height: 40px;">
+                <div class="arch-arrow">⬇</div>
+              </div>
+
+              <!-- Row 7: Cloudinary and JSON blocks -->
+              <div class="arch-box" style="grid-column: 1; grid-row: 9;">CLOUDINARY (image storage)</div>
+              <div class="arch-box" style="grid-column: 5; grid-row: 9;">NUTRITION JSON</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Part B: Middleware -->
+        <div>
+          <h3 class="arch-section-subtitle">// Backend Security Middleware Chain</h3>
+          <div class="middleware-chain">
+            <div class="middleware-box">Firebase Admin Auth</div>
+            <div class="arch-arrow" style="margin: 0.5rem 0;">⬇</div>
+            <div class="middleware-box">Helmet (Security Headers)</div>
+            <div class="arch-arrow" style="margin: 0.5rem 0;">⬇</div>
+            <div class="middleware-box">Rate Limiter (Anti-DDoS)</div>
+            <div class="arch-arrow" style="margin: 0.5rem 0;">⬇</div>
+            <div class="middleware-box">CORS Rules</div>
+            <div class="arch-arrow" style="margin: 0.5rem 0;">⬇</div>
+            <div class="middleware-box">Zod Validator (Schema)</div>
+            <div class="arch-arrow" style="margin: 0.5rem 0;">⬇</div>
+            <div class="middleware-box handler-box">Route Handler</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: The Hard Parts -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 03 · WHAT ACTUALLY WENT WRONG</span>
+      <h2 class="section-heading">Production hardening is unglamorous work.</h2>
+      
+      <div class="cards-grid">
+        <!-- Card 1: Security Incident (unaltered and honest) -->
+        <div class="challenge-card">
+          <span class="card-tag">SECURITY INCIDENT</span>
+          <h3 class="card-title">Live .env exposure</h3>
+          <p class="card-body">
+            During development, a .env file was accidentally tracked and pushed. All keys were rotated immediately — Firebase, MongoDB Atlas, Cloudinary, Gemini. node_modules was removed from git history. .gitignore was audited. Incident closed in under 2 hours.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="challenge-card">
+          <span class="card-tag">DATABASE</span>
+          <h3 class="card-title">Base64 images in MongoDB</h3>
+          <p class="card-body">
+            Early versions stored scanned food images as base64 strings directly in MongoDB documents. Documents ballooned to 2-3MB each. Migrated entirely to Cloudinary with a secure upload pipeline — MongoDB now stores only the URL.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="challenge-card">
+          <span class="card-tag">AUTH</span>
+          <h3 class="card-title">Client-side auth is not auth</h3>
+          <p class="card-body">
+            V1 trusted the frontend to enforce user scoping. Replaced with Firebase Admin SDK middleware on every protected route — token verification happens server-side, userId is extracted from the decoded token, never from the request body.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Phases -->
+  <section class="details-section bg-sage">
+    <div class="container">
+      <span class="section-label">// 04 · BUILD ROADMAP</span>
+      <h2 class="section-heading">What's done. What's next.</h2>
+
+      <div class="phase-tracker">
+        <!-- Phase 1 -->
+        <div class="phase-item complete">
+          <div class="phase-icon complete-icon">✅</div>
+          <div class="phase-content">
+            <h4 class="phase-title">
+              PHASE 1 — Security Overhaul
+              <span class="status-label">COMPLETE</span>
+            </h4>
+            <p class="phase-details">
+              Firebase Admin auth, Cloudinary migration, Zod validation, rate limiting, Helmet, CORS hardening, .env rotation
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-item in-progress">
+          <div class="phase-icon in-progress-icon">🔨</div>
+          <div class="phase-content">
+            <h4 class="phase-title">
+              PHASE 2 — UI Redesign
+              <span class="status-label">IN PROGRESS</span>
+            </h4>
+            <p class="phase-details">
+              Visual consistency pass, Framer Motion animations, Recharts data visualization
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-item pending">
+          <div class="phase-icon">⬜</div>
+          <div class="phase-content">
+            <h4 class="phase-title">
+              PHASE 3 — Feature Completion
+              <span class="status-label">PENDING</span>
+            </h4>
+            <p class="phase-details">
+              Meal history, weekly trends, export to PDF
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase-item pending">
+          <div class="phase-icon">⬜</div>
+          <div class="phase-content">
+            <h4 class="phase-title">
+              PHASE 4 — Deployment
+              <span class="status-label">PENDING</span>
+            </h4>
+            <p class="phase-details">
+              MongoDB Atlas + Railway + Vercel production pipeline
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase-item pending">
+          <div class="phase-icon">⬜</div>
+          <div class="phase-content">
+            <h4 class="phase-title">
+              PHASE 5 — Public Launch
+              <span class="status-label">PENDING</span>
+            </h4>
+            <p class="phase-details">
+              Domain, analytics, user testing
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Retrospective -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 05 · RETROSPECTIVE</span>
+      <h2 class="section-heading">If I built this again.</h2>
+      
+      <ul class="retro-list">
+        <li class="retro-item">
+          <span class="retro-arrow">→</span>
+          <div>
+            Set up Cloudinary on day one. Migrating away from base64 mid-project touches more files than you expect.
+          </div>
+        </li>
+        <li class="retro-item">
+          <span class="retro-arrow">→</span>
+          <div>
+            Write auth middleware before writing a single route. Retrofitting it is painful and you will miss edge cases.
+          </div>
+        </li>
+        <li class="retro-item">
+          <span class="retro-arrow">→</span>
+          <div>
+            .env goes in .gitignore before the first commit. Not the second. Not after npm install. First.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="index.html" class="footer-link back-link">← BACK TO PROJECTS</a>
+        <a href="knowbot.html" class="footer-link">← PREV: KNOWBOT</a>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-text">// NUTRISCAN · CASE STUDY · AUM PANDYA · 2026</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

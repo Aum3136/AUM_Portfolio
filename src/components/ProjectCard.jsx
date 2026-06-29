@@ -11,6 +11,7 @@ export function ProjectCard({
   tags = [],
   linkText = 'VIEW ON GITHUB ↗',
   link = '#',
+  caseStudyLink, // Link to case study page
   index,
   theme = 'light', // 'light' | 'dark' | 'accent'
   imageUrl, // New prop for project mockups
@@ -125,12 +126,22 @@ export function ProjectCard({
 
             {/* Footer */}
             <div className="flex justify-between items-center font-mono text-xs font-semibold">
-              <button 
-                onClick={() => setIsFlipped(true)}
-                className="text-terracotta hover:underline cursor-pointer flex items-center gap-1"
-              >
-                FLIP FOR PREVIEW 🔀
-              </button>
+              <div className="flex gap-4">
+                <button 
+                  onClick={() => setIsFlipped(true)}
+                  className="text-terracotta hover:underline cursor-pointer flex items-center gap-1"
+                >
+                  FLIP FOR PREVIEW 🔀
+                </button>
+                {caseStudyLink && (
+                  <a 
+                    href={caseStudyLink}
+                    className="text-terracotta hover:underline flex items-center gap-1"
+                  >
+                    CASE STUDY →
+                  </a>
+                )}
+              </div>
               <span className="opacity-60">{index}</span>
             </div>
           </div>
@@ -174,18 +185,29 @@ export function ProjectCard({
 
             {/* Footer Actions */}
             <div className="flex justify-between items-center">
-              {linkText === 'PRIVATE REPO —' ? (
-                <span className="font-mono text-xs opacity-50 select-none cursor-default">{linkText}</span>
-              ) : (
-                <a 
-                  href={link} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="font-mono text-xs font-bold px-3 py-1.5 border-2 border-charcoal bg-terracotta text-oatmeal hover:bg-charcoal hover:text-oatmeal shadow-[2px_2px_0px_0px_#1E1E1E] transition-all duration-200"
-                >
-                  {linkText}
-                </a>
-              )}
+              <div className="flex flex-wrap gap-2">
+                {linkText === 'PRIVATE REPO —' ? (
+                  <span className="font-mono text-xs opacity-50 select-none cursor-default">{linkText}</span>
+                ) : (
+                  <a 
+                    href={link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="font-mono text-xs font-bold px-3 py-1.5 border-2 border-charcoal bg-terracotta text-oatmeal hover:bg-charcoal hover:text-oatmeal shadow-[2px_2px_0px_0px_#1E1E1E] transition-all duration-200"
+                  >
+                    {linkText}
+                  </a>
+                )}
+                
+                {caseStudyLink && (
+                  <a 
+                    href={caseStudyLink}
+                    className="font-mono text-xs font-bold px-3 py-1.5 border-2 border-charcoal bg-terracotta text-oatmeal hover:bg-charcoal hover:text-oatmeal shadow-[2px_2px_0px_0px_#1E1E1E] transition-all duration-200"
+                  >
+                    CASE STUDY →
+                  </a>
+                )}
+              </div>
               
               <button 
                 onClick={() => setIsFlipped(false)}
