@@ -103,7 +103,7 @@ html, body {
   .project-card-container {
     width: calc(100% - 32px) !important;
     max-width: calc(100% - 32px) !important;
-    margin: 0 16px !important;
+    margin: 0 auto !important; /* Center the card */
     overflow: hidden !important;
     height: 600px !important;
   }
@@ -153,19 +153,20 @@ html, body {
 
   /* Logo text override to prevent wrap and fit viewport */
   .layout-logo-text {
+    display: inline-block !important;
+    max-width: 180px !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
     white-space: nowrap !important;
     font-size: clamp(0.8rem, 4vw, 1.125rem) !important;
+    vertical-align: middle !important;
   }
 
   /* STEP 3 — Remove any fixed left/right margins that push content off screen */
-  .layout-main-wrapper * {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
+  /* Centering classes are preserved and kept auto */
   .layout-main-wrapper .mx-auto, 
   .layout-main-wrapper .ml-auto, 
-  .layout-main-wrapper .mr-auto,
-  .layout-logo-text {
+  .layout-main-wrapper .mr-auto {
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -242,7 +243,7 @@ html, body {
     width: 100% !important;
     max-width: 100% !important;
     gap: 16px !important;
-    padding: 0 16px !important;
+    padding: 0 !important; /* Align with content bounds */
   }
 
   .scrapbook-grid-container > * {
@@ -265,7 +266,7 @@ html, body {
     height: 660px !important;
     width: calc(100% - 24px) !important;
     max-width: calc(100% - 24px) !important;
-    margin: 0 12px !important;
+    margin: 0 auto !important;
   }
 
   .project-card-front,

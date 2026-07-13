@@ -582,7 +582,7 @@ export function BentoGrid({ onContactClick }) {
             </p>
 
             {/* Terminal Screen Container */}
-            <div className="bg-charcoal text-oatmeal p-5 border-2 border-charcoal font-mono text-xs space-y-3 relative">
+            <div className="bg-charcoal text-oatmeal p-5 border-2 border-charcoal font-mono text-xs space-y-3 relative overflow-hidden">
               {/* Terminal Title Bar */}
               <div className="flex justify-between items-center border-b border-oatmeal/10 pb-2 mb-2 text-[10px] text-oatmeal/40 select-none">
                 <span>aum@antigravity:~</span>
@@ -598,7 +598,7 @@ export function BentoGrid({ onContactClick }) {
                   {commits.map((commit, idx) => (
                     <li key={idx} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 border-b border-oatmeal/5 pb-2 last:border-0 last:pb-0">
                       <span className="font-bold text-terracotta shrink-0">[{commit.repo}]</span>
-                      <span className="text-oatmeal/90 flex-1 truncate">{commit.message}</span>
+                      <div className="text-oatmeal/90 flex-1 truncate min-w-0">{commit.message}</div>
                       <span className="text-oatmeal/40 text-[10px] shrink-0 font-sans">· {commit.time}</span>
                     </li>
                   ))}
