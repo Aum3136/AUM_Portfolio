@@ -99,15 +99,6 @@ html, body {
     grid-row: span 1 / span 1 !important;
   }
 
-  /* STEP 3 — Target the actual ProjectCard class: width: calc(100% - 32px); margin: 0 16px; overflow: hidden; */
-  .project-card-container {
-    width: calc(100% - 32px) !important;
-    max-width: calc(100% - 32px) !important;
-    margin: 0 auto !important; /* Center the card */
-    overflow: hidden !important;
-    height: 600px !important;
-  }
-
   /* STEP 3 — Target the actual HeroCanvas/hero section class: width: 100%; overflow: hidden; */
   .hero-canvas-wrapper,
   .bento-hero-card {
@@ -201,41 +192,6 @@ html, body {
     padding: 16px !important;
   }
 
-  /* STEP 4 — Project cards specifically: text word-wrap, Quote width, tag flex-wrap */
-  .project-card-container * {
-    overflow-wrap: break-word !important;
-    word-wrap: break-word !important;
-  }
-
-  .project-card-front,
-  .project-card-back {
-    padding: 16px !important;
-  }
-
-  .project-card-quote {
-    overflow: hidden !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    font-size: 0.75rem !important;
-  }
-
-  .project-card-tags {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .project-card-tag {
-    font-size: 9px !important;
-    padding: 0.15rem 0.4rem !important;
-  }
-
-  .project-card-image-container {
-    height: 46% !important;
-  }
-
   /* STEP 5 — Bottom info cards row: stack to single column, width 100%, button 100% text-center */
   .scrapbook-grid-container {
     display: flex !important;
@@ -257,41 +213,5 @@ html, body {
     width: 100% !important;
     text-align: center !important;
     display: block !important;
-  }
-}
-
-@media (max-width: 480px) {
-  /* Tighten spacing for smaller phones */
-  .project-card-container {
-    height: 660px !important;
-    width: calc(100% - 24px) !important;
-    max-width: calc(100% - 24px) !important;
-    margin: 0 auto !important;
-  }
-
-  .project-card-front,
-  .project-card-back {
-    padding: 12px !important;
-  }
-
-  .project-card-title {
-    font-size: 1.3rem !important;
-  }
-
-  .project-card-container p {
-    font-size: 0.75rem !important;
-    line-height: 1.3 !important;
-  }
-
-  .project-card-quote {
-    font-size: 0.7rem !important;
-  }
-
-  .project-card-highlights li {
-    font-size: 0.7rem !important;
-  }
-
-  .project-card-image-container {
-    height: 40% !important;
   }
 }
