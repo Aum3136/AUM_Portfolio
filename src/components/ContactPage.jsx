@@ -138,7 +138,7 @@ export function ContactPage({ onClose }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={cardTransition}
-      className="w-full max-w-2xl mx-auto bg-oatmeal text-charcoal p-8 border-2 border-charcoal relative z-10"
+      className="w-full max-w-2xl mx-auto bg-oatmeal text-charcoal p-8 border-2 border-charcoal relative z-10 contact-card-container"
       style={{ boxShadow: '6px 6px 0px 0px #1E1E1E' }}
     >
       {/* Tape Effect */}

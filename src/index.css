@@ -63,3 +63,143 @@
 .oss-left-panel:hover::before {
   transform: translateX(-4px); /* Shifts border left by 4px */
 }
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS MEDIA QUERIES (max-width: 768px & max-width: 480px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Layout adjustments and grid collapse overrides */
+  .bento-grid-container {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .bento-grid-container > * {
+    grid-column: span 1 / span 1 !important;
+    grid-row: span 1 / span 1 !important;
+  }
+  
+  .scrapbook-grid-container {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .scrapbook-grid-container > * {
+    grid-column: span 1 / span 1 !important;
+    grid-row: span 1 / span 1 !important;
+  }
+
+  /* Hero Section Stacking */
+  .hero-columns-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+  }
+
+  .hero-columns-container > div {
+    width: 100% !important;
+  }
+
+  /* Prevent page overflow */
+  html, body, #root {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+  }
+
+  /* Contact page styling adjustments */
+  .contact-card-container {
+    padding: 1.5rem !important;
+  }
+
+  /* Project Card responsiveness */
+  .project-card-container {
+    height: 600px !important;
+  }
+
+  .project-card-front,
+  .project-card-back {
+    padding: 1.25rem !important;
+  }
+
+  .project-card-title {
+    font-size: 1.6rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .project-card-container p {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .project-card-quote {
+    font-size: 0.75rem !important;
+    margin: 0.5rem 0 !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  .project-card-highlights {
+    margin-top: 0.5rem !important;
+  }
+
+  .project-card-highlights span {
+    font-size: 8px !important;
+  }
+
+  .project-card-highlights ul {
+    margin-top: 0.25rem !important;
+    padding-left: 1rem !important;
+  }
+
+  .project-card-highlights li {
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .project-card-tags {
+    gap: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .project-card-tag {
+    font-size: 9px !important;
+    padding: 0.15rem 0.4rem !important;
+  }
+
+  .project-card-image-container {
+    height: 48% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Tighten spacing for smaller phones */
+  .project-card-container {
+    height: 660px !important;
+  }
+
+  .project-card-front,
+  .project-card-back {
+    padding: 1rem !important;
+  }
+
+  .project-card-title {
+    font-size: 1.4rem !important;
+  }
+
+  .project-card-container p {
+    font-size: 0.75rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .project-card-quote {
+    font-size: 0.7rem !important;
+  }
+
+  .project-card-highlights li {
+    font-size: 0.7rem !important;
+  }
+
+  .project-card-image-container {
+    height: 42% !important;
+  }
+}

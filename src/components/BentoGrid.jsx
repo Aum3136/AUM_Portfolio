@@ -138,7 +138,7 @@ export function BentoGrid({ onContactClick }) {
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mx-auto"
+      className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mx-auto bento-grid-container"
     >
       {/* 1. Hero Introduction Card (col-span-2, row-span-2) */}
       <motion.div
@@ -148,7 +148,7 @@ export function BentoGrid({ onContactClick }) {
         className="md:col-span-2 md:row-span-2 bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between"
         style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
       >
-        <div className="flex flex-col md:flex-row gap-8 items-start justify-between">
+        <div className="flex flex-col md:flex-row gap-8 items-start justify-between hero-columns-container">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-6 text-terracotta">
               <Sparkles className="w-5 h-5" />
@@ -263,7 +263,7 @@ export function BentoGrid({ onContactClick }) {
         </p>
       </div>
 
-      <div className="col-span-1 md:col-span-3 flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-none w-full pb-6 md:pb-0">
+      <div className="col-span-1 md:col-span-3 flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-none w-full pb-6 md:pb-0 min-w-0">
         <div className="w-[85vw] md:w-full shrink-0 snap-start snap-always">
           <CurrentlyBuildingCard
             title="Cafe Software"
@@ -326,7 +326,7 @@ export function BentoGrid({ onContactClick }) {
           <div className="flex-1 h-0.5 bg-oatmeal/20"></div>
         </div>
         <p className="text-oatmeal/75 text-xs font-mono mb-8 uppercase tracking-widest">
-          3 projects · 2024-2025 · hover the cards. they do a little thing.
+          3 projects · 2024-2026 · hover the cards. they do a little thing.
         </p>
       </div>
 
@@ -485,7 +485,7 @@ export function BentoGrid({ onContactClick }) {
       </motion.div>
 
       {/* 5. Scrapbook / Skills & Philosophy (Grid system details) */}
-      <div className="col-span-1 md:col-span-3 mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="col-span-1 md:col-span-3 mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 scrapbook-grid-container">
         {/* Coordinates / Location */}
         <motion.div
           variants={itemVariants}

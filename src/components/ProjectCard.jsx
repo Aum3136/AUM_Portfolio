@@ -44,7 +44,7 @@ export function ProjectCard({
 
   return (
     <div 
-      className={`w-full h-[540px] cursor-pointer ${className}`}
+      className={`w-full h-[540px] cursor-pointer project-card-container ${className}`}
       style={{ perspective: '1200px' }}
       onClick={handleCardClick}
     >
@@ -56,7 +56,7 @@ export function ProjectCard({
       >
         {/* ==================== FRONT SIDE ==================== */}
         <div 
-          className={`absolute inset-0 w-full h-full border-2 rounded-none p-6 md:p-8 flex flex-col justify-between overflow-hidden ${themeClasses[theme]}`}
+          className={`absolute inset-0 w-full h-full border-2 rounded-none p-6 md:p-8 flex flex-col justify-between overflow-hidden project-card-front ${themeClasses[theme]}`}
           style={{ 
             backfaceVisibility: 'hidden',
             boxShadow: '4px 4px 0px 0px #1E1E1E',
@@ -78,7 +78,7 @@ export function ProjectCard({
             </div>
 
             {/* Title & Body */}
-            <h3 className="font-serif text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-none text-current">
+            <h3 className="font-serif text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-none text-current project-card-title">
               {title}
             </h3>
             
@@ -87,14 +87,14 @@ export function ProjectCard({
             </p>
 
             {quote && (
-              <div className={`font-mono text-xs md:text-sm italic pl-3 border-l-2 border-current/30 py-1.5 my-3.5 leading-relaxed ${quoteClass}`}>
+              <div className={`font-mono text-xs md:text-sm italic pl-3 border-l-2 border-current/30 py-1.5 my-3.5 leading-relaxed project-card-quote ${quoteClass}`}>
                 "{quote}"
               </div>
             )}
 
             {/* Highlights List */}
             {highlights && highlights.length > 0 && (
-              <div className="mt-4 text-left">
+              <div className="mt-4 text-left project-card-highlights">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-terracotta font-bold">Key Milestones //</span>
                 <ul className="list-disc pl-5 space-y-1 text-xs md:text-sm text-current/80 font-sans mt-1">
                   {highlights.map((highlight, idx) => (
@@ -110,11 +110,11 @@ export function ProjectCard({
             <div className={`w-full border-t ${lineClass} my-4`} />
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-1.5 mb-4">
+            <div className="flex flex-wrap gap-1.5 mb-4 project-card-tags">
               {tags.map((tag) => (
                 <span 
                   key={tag} 
-                  className={`font-mono text-[11px] tracking-wider uppercase px-2.5 py-1 border rounded-none transition-colors duration-200 ${tagClass}`}
+                  className={`font-mono text-[11px] tracking-wider uppercase px-2.5 py-1 border rounded-none transition-colors duration-200 project-card-tag ${tagClass}`}
                 >
                   {tag}
                 </span>
@@ -149,7 +149,7 @@ export function ProjectCard({
 
         {/* ==================== BACK SIDE ==================== */}
         <div 
-          className={`absolute inset-0 w-full h-full border-2 rounded-none p-6 md:p-8 flex flex-col justify-between overflow-hidden ${themeClasses[theme]}`}
+          className={`absolute inset-0 w-full h-full border-2 rounded-none p-6 md:p-8 flex flex-col justify-between overflow-hidden project-card-back ${themeClasses[theme]}`}
           style={{ 
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
@@ -157,7 +157,7 @@ export function ProjectCard({
           }}
         >
           {/* Mockup Landing Page/Screenshot */}
-          <div className="relative w-full h-[60%] border-2 border-charcoal bg-[#1E1E1E] overflow-hidden shadow-[2px_2px_0px_0px_#1E1E1E]">
+          <div className="relative w-full h-[60%] border-2 border-charcoal bg-[#1E1E1E] overflow-hidden shadow-[2px_2px_0px_0px_#1E1E1E] project-card-image-container">
             {imageUrl ? (
               <img 
                 src={imageUrl} 

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export function Layout({ children, heroCanvas, onContactClick, onHomeClick }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="relative min-h-screen bg-sage text-oatmeal w-full select-none selection:bg-terracotta selection:text-oatmeal">
       {/* 3D background scene */}
@@ -11,16 +13,28 @@ export function Layout({ children, heroCanvas, onContactClick, onHomeClick }) {
       {/* Main content wrapper */}
       <div className="relative z-10 flex flex-col min-h-screen w-full max-w-7xl mx-auto px-6 py-8 md:px-12 md:py-16">
         {/* Navigation header */}
-        <header className="flex justify-between items-center w-full mb-16 md:mb-24">
-          <div onClick={onHomeClick} className="flex items-center gap-3 cursor-pointer">
-            <div className="w-8 h-8 rounded-full bg-terracotta border-2 border-charcoal flex items-center justify-center font-bold text-sm text-oatmeal shadow-[2px_2px_0px_0px_#1E1E1E]">
+        <header className="relative flex justify-between items-center w-full mb-16 md:mb-24">
+          <div onClick={onHomeClick} className="flex items-center gap-3 cursor-pointer min-w-0">
+            <div className="w-8 h-8 rounded-full bg-terracotta border-2 border-charcoal flex items-center justify-center font-bold text-sm text-oatmeal shadow-[2px_2px_0px_0px_#1E1E1E] shrink-0">
               α
             </div>
-            <span className="font-semibold text-lg tracking-wider uppercase font-sans select-none">
+            <span className="font-semibold text-sm sm:text-lg tracking-wider uppercase font-sans select-none whitespace-nowrap overflow-hidden text-ellipsis">
               Aum Pandya - my Portfolio
             </span>
           </div>
-          <nav className="flex items-center gap-6 text-sm font-medium">
+
+          {/* Hamburger Button */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden flex flex-col justify-between w-6 h-4 cursor-pointer focus:outline-none z-50 group"
+            aria-label="Toggle Menu"
+          >
+            <span className={`h-[3px] w-full bg-terracotta transition-all duration-300 rounded-sm ${isMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`}></span>
+            <span className={`h-[3px] w-full bg-terracotta transition-all duration-300 rounded-sm ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`h-[3px] w-full bg-terracotta transition-all duration-300 rounded-sm ${isMenuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`}></span>
+          </button>
+
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <a 
               href="#about" 
               onClick={(e) => { e.preventDefault(); onHomeClick(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }} 
@@ -50,6 +64,41 @@ export function Layout({ children, heroCanvas, onContactClick, onHomeClick }) {
               Get In Touch
             </button>
           </nav>
+
+          {/* Mobile Dropdown Menu */}
+          {isMenuOpen && (
+            <div className="absolute top-12 left-0 right-0 bg-oatmeal text-charcoal border-2 border-charcoal p-6 flex flex-col gap-4 shadow-[4px_4px_0px_0px_#1E1E1E] z-40 md:hidden">
+              <a 
+                href="#about" 
+                onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); onHomeClick(); setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 100); }} 
+                className="hover:text-terracotta font-medium transition-colors duration-200 text-sm font-sans"
+              >
+                About
+              </a>
+              <a 
+                href="#projects" 
+                onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); onHomeClick(); setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 100); }} 
+                className="hover:text-terracotta font-medium transition-colors duration-200 text-sm font-sans"
+              >
+                Projects
+              </a>
+              <a 
+                href="/blog.html" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => setIsMenuOpen(false)}
+                className="hover:text-terracotta font-medium transition-colors duration-200 text-sm font-sans"
+              >
+                Blog
+              </a>
+              <button 
+                onClick={() => { setIsMenuOpen(false); onContactClick(); }} 
+                className="w-full py-2 bg-terracotta text-oatmeal border-2 border-charcoal font-semibold shadow-[2px_2px_0px_0px_#1E1E1E] hover:shadow-[4px_4px_0px_0px_#1E1E1E] transition-all duration-200 active:translate-x-0 active:translate-y-0 cursor-pointer"
+              >
+                Get In Touch
+              </button>
+            </div>
+          )}
         </header>
 
         {/* Content body */}
