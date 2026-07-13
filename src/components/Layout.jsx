@@ -4,21 +4,21 @@ export function Layout({ children, heroCanvas, onContactClick, onHomeClick }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-sage text-oatmeal w-full select-none selection:bg-terracotta selection:text-oatmeal">
+    <div className="relative min-h-screen bg-sage text-oatmeal w-full select-none selection:bg-terracotta selection:text-oatmeal layout-main-wrapper">
       {/* 3D background scene */}
-      <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
+      <div className="fixed inset-0 w-full h-full pointer-events-none z-0 hero-canvas-wrapper">
         {heroCanvas}
       </div>
 
       {/* Main content wrapper */}
-      <div className="relative z-10 flex flex-col min-h-screen w-full max-w-7xl mx-auto px-6 py-8 md:px-12 md:py-16">
+      <div className="relative z-10 flex flex-col min-h-screen w-full max-w-7xl mx-auto px-6 py-8 md:px-12 md:py-16 layout-content-wrapper">
         {/* Navigation header */}
-        <header className="relative flex justify-between items-center w-full mb-16 md:mb-24">
+        <header className="relative flex justify-between items-center w-full mb-16 md:mb-24 layout-header">
           <div onClick={onHomeClick} className="flex items-center gap-3 cursor-pointer min-w-0">
             <div className="w-8 h-8 rounded-full bg-terracotta border-2 border-charcoal flex items-center justify-center font-bold text-sm text-oatmeal shadow-[2px_2px_0px_0px_#1E1E1E] shrink-0">
               α
             </div>
-            <span className="font-semibold text-sm sm:text-lg tracking-wider uppercase font-sans select-none whitespace-nowrap overflow-hidden text-ellipsis">
+            <span className="font-semibold text-sm sm:text-lg tracking-wider uppercase font-sans select-none whitespace-nowrap overflow-hidden text-ellipsis layout-logo-text">
               Aum Pandya - my Portfolio
             </span>
           </div>

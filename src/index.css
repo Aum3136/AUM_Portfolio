@@ -12,11 +12,21 @@
   --color-charcoal: #1E1E1E;
 }
 
+*, *::before, *::after { 
+  box-sizing: border-box; 
+}
+html, body { 
+  overflow-x: hidden; 
+  width: 100%;
+  max-width: 100%;
+}
+
 @layer base {
   html, body, #root {
     margin: 0;
     padding: 0;
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     font-family: var(--font-sans);
     background-color: #4A5D4E; /* sage */
@@ -69,26 +79,44 @@
    ========================================================================== */
 
 @media (max-width: 768px) {
-  /* Layout adjustments and grid collapse overrides */
+  /* STEP 3 — Target the actual Layout wrapper class: width: 100%; overflow-x: hidden; */
+  .layout-main-wrapper, 
+  .layout-content-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  /* STEP 3 — Target the actual BentoGrid container class: grid-template-columns: 1fr; width: 100%; */
   .bento-grid-container {
     grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
-  
+
   .bento-grid-container > * {
     grid-column: span 1 / span 1 !important;
     grid-row: span 1 / span 1 !important;
   }
-  
-  .scrapbook-grid-container {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .scrapbook-grid-container > * {
-    grid-column: span 1 / span 1 !important;
-    grid-row: span 1 / span 1 !important;
+
+  /* STEP 3 — Target the actual ProjectCard class: width: calc(100% - 32px); margin: 0 16px; overflow: hidden; */
+  .project-card-container {
+    width: calc(100% - 32px) !important;
+    max-width: calc(100% - 32px) !important;
+    margin: 0 16px !important;
+    overflow: hidden !important;
+    height: 600px !important;
   }
 
-  /* Hero Section Stacking */
+  /* STEP 3 — Target the actual HeroCanvas/hero section class: width: 100%; overflow: hidden; */
+  .hero-canvas-wrapper,
+  .bento-hero-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Hero Section Stacking layout adjustment */
   .hero-columns-container {
     flex-direction: column !important;
     align-items: center !important;
@@ -99,66 +127,103 @@
     width: 100% !important;
   }
 
-  /* Prevent page overflow */
-  html, body, #root {
-    overflow-x: hidden !important;
-    max-width: 100vw;
+  /* STEP 3 — All headings inside components: font-size clamp, word-wrap break, white-space normal */
+  .layout-main-wrapper h1, 
+  .layout-main-wrapper h2, 
+  .layout-main-wrapper h3,
+  .layout-main-wrapper h4,
+  .layout-main-wrapper h5,
+  .layout-main-wrapper h6 {
+    font-size: clamp(1.4rem, 5vw, 2.5rem) !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
   }
 
-  /* Contact page styling adjustments */
+  /* STEP 3 — All p, li, span elements: word-wrap, overflow-wrap, max-width 100% */
+  .layout-main-wrapper p, 
+  .layout-main-wrapper li, 
+  .layout-main-wrapper span, 
+  .layout-main-wrapper a, 
+  .layout-main-wrapper button {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+  }
+
+  /* Logo text override to prevent wrap and fit viewport */
+  .layout-logo-text {
+    white-space: nowrap !important;
+    font-size: clamp(0.8rem, 4vw, 1.125rem) !important;
+  }
+
+  /* STEP 3 — Remove any fixed left/right margins that push content off screen */
+  .layout-main-wrapper * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .layout-main-wrapper .mx-auto, 
+  .layout-main-wrapper .ml-auto, 
+  .layout-main-wrapper .mr-auto,
+  .layout-logo-text {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* STEP 3 — All flex containers: flex-wrap: wrap; */
+  .layout-main-wrapper .flex, 
+  .layout-main-wrapper [class*="flex-"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* STEP 3 — All grid containers: grid-template-columns: 1fr; */
+  .layout-main-wrapper .grid, 
+  .layout-main-wrapper [class*="grid-"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* STEP 3 — Padding on sections: reduce to 16px on mobile */
+  .layout-content-wrapper {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .bento-hero-card,
+  .bento-obsessions-card,
+  .bento-oss-left,
+  .bento-oss-right,
+  .bento-location-card,
+  .bento-status-card,
+  .bento-system-card,
+  .bento-github-card,
   .contact-card-container {
-    padding: 1.5rem !important;
+    padding: 16px !important;
   }
 
-  /* Project Card responsiveness */
-  .project-card-container {
-    height: 600px !important;
+  /* STEP 4 — Project cards specifically: text word-wrap, Quote width, tag flex-wrap */
+  .project-card-container * {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
   }
 
   .project-card-front,
   .project-card-back {
-    padding: 1.25rem !important;
-  }
-
-  .project-card-title {
-    font-size: 1.6rem !important;
-    line-height: 1.1 !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  .project-card-container p {
-    font-size: 0.8rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 0.5rem !important;
+    padding: 16px !important;
   }
 
   .project-card-quote {
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     font-size: 0.75rem !important;
-    margin: 0.5rem 0 !important;
-    padding: 0.25rem 0.5rem !important;
-  }
-
-  .project-card-highlights {
-    margin-top: 0.5rem !important;
-  }
-
-  .project-card-highlights span {
-    font-size: 8px !important;
-  }
-
-  .project-card-highlights ul {
-    margin-top: 0.25rem !important;
-    padding-left: 1rem !important;
-  }
-
-  .project-card-highlights li {
-    font-size: 0.75rem !important;
-    line-height: 1.3 !important;
   }
 
   .project-card-tags {
-    gap: 0.25rem !important;
-    margin-bottom: 0.5rem !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .project-card-tag {
@@ -167,7 +232,30 @@
   }
 
   .project-card-image-container {
-    height: 48% !important;
+    height: 46% !important;
+  }
+
+  /* STEP 5 — Bottom info cards row: stack to single column, width 100%, button 100% text-center */
+  .scrapbook-grid-container {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 16px !important;
+    padding: 0 16px !important;
+  }
+
+  .scrapbook-grid-container > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .scrapbook-grid-container button,
+  .scrapbook-grid-container a {
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
   }
 }
 
@@ -175,20 +263,23 @@
   /* Tighten spacing for smaller phones */
   .project-card-container {
     height: 660px !important;
+    width: calc(100% - 24px) !important;
+    max-width: calc(100% - 24px) !important;
+    margin: 0 12px !important;
   }
 
   .project-card-front,
   .project-card-back {
-    padding: 1rem !important;
+    padding: 12px !important;
   }
 
   .project-card-title {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
   }
 
   .project-card-container p {
     font-size: 0.75rem !important;
-    line-height: 1.35 !important;
+    line-height: 1.3 !important;
   }
 
   .project-card-quote {
@@ -200,6 +291,6 @@
   }
 
   .project-card-image-container {
-    height: 42% !important;
+    height: 40% !important;
   }
 }

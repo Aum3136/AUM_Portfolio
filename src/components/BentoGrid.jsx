@@ -145,7 +145,7 @@ export function BentoGrid({ onContactClick }) {
         variants={itemVariants}
         whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
         transition={cardTransition}
-        className="md:col-span-2 md:row-span-2 bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between"
+        className="md:col-span-2 md:row-span-2 bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between bento-hero-card"
         style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
       >
         <div className="flex flex-col md:flex-row gap-8 items-start justify-between hero-columns-container">
@@ -208,7 +208,7 @@ export function BentoGrid({ onContactClick }) {
         variants={itemVariants}
         whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
         transition={cardTransition}
-        className="md:col-span-1 md:row-span-2 bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between"
+        className="md:col-span-1 md:row-span-2 bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between bento-obsessions-card"
         style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
       >
         <div>
@@ -417,10 +417,10 @@ export function BentoGrid({ onContactClick }) {
 
       <motion.div 
         variants={itemVariants}
-        className="col-span-1 md:col-span-3 flex flex-col md:flex-row gap-6 w-full"
+        className="col-span-1 md:col-span-3 flex flex-col md:flex-row gap-6 w-full bento-oss-container"
       >
         {/* Left Panel: Contribution Card */}
-        <div className="w-full md:w-[65%] oss-left-panel p-8 border-2 border-charcoal bg-oatmeal text-charcoal flex flex-col justify-between">
+        <div className="w-full md:w-[65%] oss-left-panel p-8 border-2 border-charcoal bg-oatmeal text-charcoal flex flex-col justify-between bento-oss-left">
           <div>
             <div className="flex justify-between items-center mb-4">
               <span className="font-mono text-[10px] uppercase tracking-wider text-terracotta font-bold">
@@ -468,7 +468,7 @@ export function BentoGrid({ onContactClick }) {
         </div>
 
         {/* Right Panel: Commitment Statement Card */}
-        <div className="w-full md:w-[35%] bg-[#4A5C4E] text-oatmeal p-8 border-2 border-charcoal flex flex-col justify-between rounded-none">
+        <div className="w-full md:w-[35%] bg-[#4A5C4E] text-oatmeal p-8 border-2 border-charcoal flex flex-col justify-between rounded-none bento-oss-right">
           <div>
             <span className="font-mono text-[9px] uppercase tracking-wider text-oatmeal/60 block mb-6">
               // CONTRIBUTOR MINDSET
@@ -491,7 +491,7 @@ export function BentoGrid({ onContactClick }) {
           variants={itemVariants}
           whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
           transition={cardTransition}
-          className="bg-terracotta text-oatmeal p-8 border-2 border-charcoal flex flex-col justify-between"
+          className="bg-terracotta text-oatmeal p-8 border-2 border-charcoal flex flex-col justify-between bento-location-card"
           style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
         >
           <div>
@@ -513,7 +513,7 @@ export function BentoGrid({ onContactClick }) {
         <motion.div
           variants={itemVariants}
           whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
-          className="bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between"
+          className="bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between bento-status-card"
           style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
           transition={cardTransition}
         >
@@ -539,7 +539,7 @@ export function BentoGrid({ onContactClick }) {
           variants={itemVariants}
           whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
           transition={cardTransition}
-          className="bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between"
+          className="bg-oatmeal text-charcoal p-8 border-2 border-charcoal flex flex-col justify-between bento-system-card"
           style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
         >
           <div>
@@ -563,7 +563,7 @@ export function BentoGrid({ onContactClick }) {
         <motion.div
           variants={itemVariants}
           whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px #1E1E1E' }}
-          className="col-span-1 md:col-span-3 bg-oatmeal text-charcoal p-8 border-2 border-charcoal relative flex flex-col justify-between"
+          className="col-span-1 md:col-span-3 bg-oatmeal text-charcoal p-8 border-2 border-charcoal relative flex flex-col justify-between bento-github-card"
           style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
           transition={cardTransition}
         >
