@@ -100,134 +100,136 @@ img, video, canvas {
   overflow-x: hidden;
 }
 
-.layout-content-wrapper {
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  max-width: 100%;
-}
+@media (max-width: 767px) {
+  .layout-content-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    max-width: 100%;
+  }
 
-/* Logo text — single line, never wraps */
-.layout-logo-text {
-  font-size: clamp(0.75rem, 3vw, 1rem);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 55vw;
-}
+  /* Logo text — single line, never wraps */
+  .layout-logo-text {
+    font-size: clamp(0.75rem, 3vw, 1rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 55vw;
+  }
 
-/* Three.js canvas container */
-.hero-canvas-wrapper {
-  overflow: hidden;
-  max-height: 50vh;
-}
+  /* Three.js canvas container */
+  .hero-canvas-wrapper {
+    overflow: hidden;
+    max-height: 50vh;
+  }
 
-/* Bento grid — single column on mobile */
-.bento-grid-container {
-  grid-template-columns: 1fr;
-  gap: 16px;
-  max-width: 100%;
-}
+  /* Bento grid — single column on mobile */
+  .bento-grid-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 100%;
+  }
 
-/* Force all direct children to single col/row on mobile */
-.bento-grid-container > * {
-  grid-column: span 1 / span 1;
-  grid-row: span 1 / span 1;
-}
+  /* Force all direct children to single col/row on mobile */
+  .bento-grid-container > * {
+    grid-column: span 1 / span 1;
+    grid-row: span 1 / span 1;
+  }
 
-/* Hero card */
-.bento-hero-card {
-  padding: 20px;
-  max-width: 100%;
-  overflow: hidden;
-}
+  /* Hero card */
+  .bento-hero-card {
+    padding: 20px;
+    max-width: 100%;
+    overflow: hidden;
+  }
 
-.bento-hero-card h1 {
-  font-size: clamp(1.6rem, 6vw, 3rem);
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
+  .bento-hero-card h1 {
+    font-size: clamp(1.6rem, 6vw, 3rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
 
-.bento-hero-card p {
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
-  overflow-wrap: break-word;
-}
+  .bento-hero-card p {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    overflow-wrap: break-word;
+  }
 
-/* Hero columns — stack vertically on mobile */
-.hero-columns-container {
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
+  /* Hero columns — stack vertically on mobile */
+  .hero-columns-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
 
-.hero-columns-container > div {
-  width: 100%;
-}
+  .hero-columns-container > div {
+    width: 100%;
+  }
 
-/* Obsessions card */
-.bento-obsessions-card {
-  padding: 20px;
-}
+  /* Obsessions card */
+  .bento-obsessions-card {
+    padding: 20px;
+  }
 
-.bento-obsessions-card h2 {
-  font-size: clamp(1.3rem, 4vw, 1.8rem);
-}
+  .bento-obsessions-card h2 {
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+  }
 
-/* OSS section — stack vertically on mobile */
-.bento-oss-container {
-  flex-direction: column;
-}
+  /* OSS section — stack vertically on mobile */
+  .bento-oss-container {
+    flex-direction: column;
+  }
 
-.bento-oss-left,
-.bento-oss-right {
-  width: 100%;
-  padding: 20px;
-}
+  .bento-oss-left,
+  .bento-oss-right {
+    width: 100%;
+    padding: 20px;
+  }
 
-.bento-oss-left h3 {
-  font-size: clamp(1.3rem, 4vw, 1.8rem);
-  overflow-wrap: break-word;
-}
+  .bento-oss-left h3 {
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    overflow-wrap: break-word;
+  }
 
-/* Scrapbook / bottom info cards — single column on mobile */
-.scrapbook-grid-container {
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
+  /* Scrapbook / bottom info cards — single column on mobile */
+  .scrapbook-grid-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 
-/* Location, status, system cards */
-.bento-location-card,
-.bento-status-card,
-.bento-system-card {
-  padding: 20px;
-}
+  /* Location, status, system cards */
+  .bento-location-card,
+  .bento-status-card,
+  .bento-system-card {
+    padding: 20px;
+  }
 
-.bento-location-card h2,
-.bento-status-card h3,
-.bento-system-card h2 {
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-  overflow-wrap: break-word;
-}
+  .bento-location-card h2,
+  .bento-status-card h3,
+  .bento-system-card h2 {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    overflow-wrap: break-word;
+  }
 
-/* GitHub activity card */
-.bento-github-card {
-  padding: 20px;
-}
+  /* GitHub activity card */
+  .bento-github-card {
+    padding: 20px;
+  }
 
-.bento-github-card h3 {
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-}
+  .bento-github-card h3 {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+  }
 
-/* Contact page */
-.contact-card-container {
-  padding: 20px;
-  max-width: 100%;
-}
+  /* Contact page */
+  .contact-card-container {
+    padding: 20px;
+    max-width: 100%;
+  }
 
-.contact-card-container h2 {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  overflow-wrap: break-word;
+  .contact-card-container h2 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    overflow-wrap: break-word;
+  }
 }
 
 /* Global text overflow safety on all card text */
