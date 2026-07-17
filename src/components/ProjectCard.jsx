@@ -163,6 +163,7 @@ export function ProjectCard({
                 src={imageUrl} 
                 alt={`${title} mockup`} 
                 className="w-full h-full object-contain select-none"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center font-mono text-xs text-charcoal/60">

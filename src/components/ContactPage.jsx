@@ -322,7 +322,7 @@ export function ContactPage({ onClose }) {
             <GithubIcon className="w-3.5 h-3.5" /> GitHub
           </a>
           <a 
-            href="https://linkedin.com" 
+            href="https://www.linkedin.com/in/aum-pandya-832269254" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="flex items-center gap-1.5 hover:text-terracotta transition-colors"

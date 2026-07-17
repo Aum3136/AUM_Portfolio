@@ -113,7 +113,7 @@ export function Layout({ children, heroCanvas, onContactClick, onHomeClick }) {
           </div>
           <div className="flex gap-6">
             <a href="https://github.com/Aum3136" target="_blank" rel="noopener noreferrer" className="hover:text-oatmeal transition-colors">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-oatmeal transition-colors">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/aum-pandya-832269254" target="_blank" rel="noopener noreferrer" className="hover:text-oatmeal transition-colors">LinkedIn</a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-oatmeal transition-colors">Twitter</a>
           </div>
         </footer>
