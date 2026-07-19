@@ -187,12 +187,20 @@ export function BentoGrid({ onContactClick }) {
           </div>
         </div>
         
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex flex-wrap gap-4">
           <a 
             href="#projects" 
             className="px-5 py-2.5 bg-terracotta text-oatmeal border-2 border-charcoal font-semibold text-sm hover:shadow-[4px_4px_0px_0px_#1E1E1E] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all duration-200"
           >
             Explore Projects
+          </a>
+          <a 
+            href="/Aum_Pandya_Resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="px-5 py-2.5 bg-oatmeal text-charcoal border-2 border-charcoal font-semibold text-sm hover:shadow-[4px_4px_0px_0px_#1E1E1E] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all duration-200"
+          >
+            View Resume
           </a>
           <button 
             onClick={onContactClick} 
