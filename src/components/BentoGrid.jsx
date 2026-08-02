@@ -27,6 +27,7 @@ import avatarImage from '../assets/avatar.jpg';
 export function BentoGrid({ onContactClick }) {
   const cardTransition = { type: 'spring', stiffness: 60, damping: 15 };
   
+  const [isColored, setIsColored] = useState(false);
   const [commits, setCommits] = useState([]);
   const [loadingCommits, setLoadingCommits] = useState(true);
   const [commitError, setCommitError] = useState(false);
@@ -166,7 +167,12 @@ export function BentoGrid({ onContactClick }) {
           </div>
           
           {/* Polaroid Image Container */}
-          <div className="relative flex-shrink-0 mx-auto md:mx-0 mt-8 md:mt-0 rotate-[3deg] hover:rotate-0 transition-transform duration-300 select-none">
+          <div 
+            onTouchStart={() => setIsColored(true)}
+            onTouchEnd={() => setIsColored(false)}
+            onTouchCancel={() => setIsColored(false)}
+            className="relative flex-shrink-0 mx-auto md:mx-0 mt-8 md:mt-0 rotate-[3deg] hover:rotate-0 transition-transform duration-300 select-none cursor-pointer"
+          >
             {/* Terracotta Tape Effect at the Top */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-28 h-6 bg-terracotta/90 border border-charcoal/30 -rotate-6 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.15)] z-10 flex items-center justify-center font-mono text-[9px] text-oatmeal font-bold">
               aum_pandya.raw
@@ -177,7 +183,7 @@ export function BentoGrid({ onContactClick }) {
                 <img 
                   src={avatarImage} 
                   alt="Aum Pandya" 
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 ease-in-out" 
+                  className={`w-full h-full object-cover transition-all duration-500 ease-in-out ${isColored ? 'grayscale-0' : 'grayscale'} hover:grayscale-0`} 
                 />
               </div>
               <div className="mt-3 font-mono text-[10px] text-charcoal/70 text-center uppercase tracking-wider font-semibold">
