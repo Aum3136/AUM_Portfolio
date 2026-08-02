@@ -95,147 +95,252 @@ img, video, canvas {
 
 /* ==========================================================================
    MOBILE-FIRST RESPONSIVE SYSTEM
-   Base = 320px+, scale UP through breakpoints
+   Base = 320px+ (Mobile & Tablet default), scale UP through min-width queries
    ========================================================================== */
 
-/* ---------- BASE MOBILE STYLES (320px+) ---------- */
+/* ---------- BASE MOBILE & TABLET STYLES (320px+ up to 1023px) ---------- */
 
 /* Layout wrappers */
 .layout-main-wrapper {
+  width: 100%;
   max-width: 100%;
   overflow-x: hidden;
 }
 
-@media (max-width: 767px) {
-  .layout-content-wrapper {
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 24px;
-    padding-bottom: 24px;
-    max-width: 100%;
-  }
+.layout-content-wrapper {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
 
-  /* Logo text — single line, never wraps */
-  .layout-logo-text {
-    font-size: clamp(0.75rem, 3vw, 1rem);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 55vw;
-  }
+/* Header & Logo */
+.layout-header {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
 
-  /* Three.js canvas container */
-  .hero-canvas-wrapper {
-    overflow: hidden;
-    max-height: 50vh;
-  }
+.layout-logo-text {
+  font-size: clamp(0.75rem, 3.5vw, 1rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55vw;
+}
 
-  /* Bento grid — single column on mobile */
-  .bento-grid-container {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    max-width: 100%;
-  }
+/* Three.js canvas container */
+.hero-canvas-wrapper {
+  overflow: hidden;
+  max-height: 40vh;
+  width: 100%;
+  max-width: 100%;
+}
 
-  /* Force all direct children to single col/row on mobile */
-  .bento-grid-container > * {
-    grid-column: span 1 / span 1;
-    grid-row: span 1 / span 1;
-  }
+/* Bento Grid — single column vertical stack below 768px */
+.bento-grid-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  gap: 16px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
 
-  /* Hero card */
-  .bento-hero-card {
-    padding: 20px;
-    max-width: 100%;
-    overflow: hidden;
-  }
+.bento-grid-container > * {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
-  .bento-hero-card h1 {
-    font-size: clamp(1.6rem, 6vw, 3rem);
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
+/* Hero card */
+.bento-hero-card {
+  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
 
-  .bento-hero-card p {
-    font-size: clamp(0.85rem, 2.5vw, 1rem);
-    overflow-wrap: break-word;
-  }
+.bento-hero-card h1 {
+  font-size: clamp(1.6rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 
-  /* Hero columns — stack vertically on mobile */
-  .hero-columns-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
+.bento-hero-card p {
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 
-  .hero-columns-container > div {
-    width: 100%;
-  }
+/* Hero columns — stack vertically on mobile */
+.hero-columns-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+}
 
-  /* Obsessions card */
-  .bento-obsessions-card {
-    padding: 20px;
-  }
+.hero-columns-container > div {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
-  .bento-obsessions-card h2 {
-    font-size: clamp(1.3rem, 4vw, 1.8rem);
-  }
+/* Polaroid card inside Hero */
+.hero-columns-container .relative.flex-shrink-0 {
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
-  /* OSS section — stack vertically on mobile */
-  .bento-oss-container {
-    flex-direction: column;
-  }
+/* Obsessions card */
+.bento-obsessions-card {
+  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
 
-  .bento-oss-left,
-  .bento-oss-right {
-    width: 100%;
-    padding: 20px;
-  }
+.bento-obsessions-card h2 {
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  overflow-wrap: break-word;
+}
 
-  .bento-oss-left h3 {
-    font-size: clamp(1.3rem, 4vw, 1.8rem);
-    overflow-wrap: break-word;
-  }
+/* Currently Shipping Section — Stack vertically below 1024px */
+.bento-grid-container div.overflow-x-auto,
+.bento-grid-container div.snap-x {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  gap: 16px;
+  padding-bottom: 0;
+}
 
-  /* Scrapbook / bottom info cards — single column on mobile */
-  .scrapbook-grid-container {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
+.bento-grid-container div.snap-x > div {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
-  /* Location, status, system cards */
-  .bento-location-card,
-  .bento-status-card,
-  .bento-system-card {
-    padding: 20px;
-  }
+/* Project rows & Project cards */
+.project-rows-container,
+.project-row {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
-  .bento-location-card h2,
-  .bento-status-card h3,
-  .bento-system-card h2 {
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
-    overflow-wrap: break-word;
-  }
+.project-row-name,
+.project-row-category,
+.project-row-action-link {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 
-  /* GitHub activity card */
-  .bento-github-card {
-    padding: 20px;
-  }
+[data-cursor="project"] {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
-  .bento-github-card h3 {
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
-  }
+/* OSS section — stack vertically below 768px */
+.bento-oss-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  gap: 16px;
+}
 
-  /* Contact page */
-  .contact-card-container {
-    padding: 20px;
-    max-width: 100%;
-  }
+.bento-oss-left,
+.bento-oss-right {
+  width: 100%;
+  max-width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
-  .contact-card-container h2 {
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
-    overflow-wrap: break-word;
-  }
+.bento-oss-left h3 {
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Scrapbook / bottom info cards — single column below 768px */
+.scrapbook-grid-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  gap: 16px;
+}
+
+/* Location, status, system cards */
+.bento-location-card,
+.bento-status-card,
+.bento-system-card {
+  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.bento-location-card h2,
+.bento-status-card h3,
+.bento-system-card h2 {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* GitHub activity card */
+.bento-github-card {
+  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.bento-github-card h3 {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  overflow-wrap: break-word;
+}
+
+.bento-github-card .bg-charcoal {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  word-break: break-word;
+}
+
+/* Contact page */
+.contact-card-container {
+  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.contact-card-container h2 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  overflow-wrap: break-word;
 }
 
 /* Global text overflow safety on all card text */
@@ -299,11 +404,8 @@ img, video, canvas {
     font-size: 1.125rem;
   }
 
-  .hero-canvas-wrapper {
-    max-height: none;
-  }
-
   .bento-grid-container {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
@@ -328,7 +430,7 @@ img, video, canvas {
     width: auto;
   }
 
-  /* Obsessions card spans both columns on tablet so it doesn't get orphaned */
+  /* Obsessions card spans both columns on tablet */
   .bento-obsessions-card {
     grid-column: span 2;
     padding: 32px;
@@ -351,6 +453,7 @@ img, video, canvas {
 
   /* Scrapbook grid — 2 columns on tablet */
   .scrapbook-grid-container {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
@@ -369,7 +472,7 @@ img, video, canvas {
 }
 
 
-/* ---------- @media (min-width: 1024px) — DESKTOP (restore original) ---------- */
+/* ---------- @media (min-width: 1024px) — DESKTOP (EXACT RESTORE OF ORIGINAL DESKTOP) ---------- */
 
 @media (min-width: 1024px) {
   .layout-content-wrapper {
@@ -379,11 +482,27 @@ img, video, canvas {
     padding-bottom: 64px;
   }
 
+  .hero-canvas-wrapper {
+    max-height: none;
+  }
+
   .bento-grid-container {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Hero card: col-span-2, row-span-2 — matches Tailwind md:col-span-2 md:row-span-2 */
+  .bento-grid-container div.overflow-x-auto,
+  .bento-grid-container div.snap-x {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-x: visible;
+  }
+
+  .bento-grid-container div.snap-x > div {
+    width: 100%;
+  }
+
+  /* Hero card: col-span-2, row-span-2 */
   .bento-hero-card {
     grid-column: span 2;
     grid-row: span 2;
@@ -410,6 +529,7 @@ img, video, canvas {
 
   /* Scrapbook: 3 columns */
   .scrapbook-grid-container {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -427,3 +547,4 @@ img, video, canvas {
     font-size: 3.5rem;
   }
 }
+
