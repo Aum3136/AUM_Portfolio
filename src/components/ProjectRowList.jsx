@@ -85,6 +85,7 @@ export function ProjectRowList() {
             className={`project-row ${!isLinkActive ? 'project-row-inactive' : ''}`}
             onClick={() => handleRowClick(project)}
             style={{ zIndex: projects.length - index }}
+            data-cursor="project"
           >
             {/* Left Cluster */}
             <div className="project-left-cluster">

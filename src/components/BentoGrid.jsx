@@ -469,6 +469,7 @@ export function BentoGrid({ onContactClick }) {
               target="_blank" 
               rel="noopener noreferrer" 
               className="font-mono text-xs font-bold text-terracotta hover:underline flex items-center gap-1"
+              data-cursor="link"
             >
               VIEW ON GITHUB →
             </a>
@@ -574,6 +575,7 @@ export function BentoGrid({ onContactClick }) {
           className="col-span-1 md:col-span-3 bg-oatmeal text-charcoal p-8 border-2 border-charcoal relative flex flex-col justify-between bento-github-card"
           style={{ boxShadow: '4px 4px 0px 0px #1E1E1E' }}
           transition={cardTransition}
+          data-cursor="link"
         >
           <div>
             <div className="flex justify-between items-center mb-4">

@@ -47,6 +47,7 @@ export function ProjectCard({
       className={`w-full h-[540px] cursor-pointer ${className}`}
       style={{ perspective: '1200px' }}
       onClick={handleCardClick}
+      data-cursor="project"
     >
       <motion.div
         className="relative w-full h-full"

@@ -1,0 +1,108 @@
+/* Brutalist Custom Cursor Styles */
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #c1502a; /* terracotta */
+  border-radius: 0; /* brutalist square */
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 150ms ease, height 150ms ease, opacity 150ms ease;
+  will-change: transform;
+}
+
+/* Dot hover states */
+.cursor-dot--hover {
+  width: 10px;
+  height: 10px;
+  background-color: #c1502a;
+}
+
+.cursor-dot--project {
+  opacity: 0;
+}
+
+.cursor-dot--link {
+  width: 6px;
+  height: 6px;
+  opacity: 1;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid #f5f0e8; /* oatmeal cream border */
+  background-color: transparent;
+  border-radius: 0; /* brutalist square outline */
+  pointer-events: none;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 150ms ease, height 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+  will-change: transform;
+}
+
+/* Ring hover states */
+.cursor-ring--hover {
+  width: 56px;
+  height: 56px;
+  border-color: #c1502a; /* terracotta */
+}
+
+.cursor-ring--project {
+  width: 80px;
+  height: 80px;
+  background-color: #c1502a;
+  border-color: #c1502a;
+}
+
+.cursor-ring--link {
+  width: 32px;
+  height: 32px;
+  border-color: #f5f0e8;
+}
+
+/* Inner text container for ring */
+.cursor-ring-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Continuous rotation animation for link hover state */
+@keyframes cursor-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cursor-ring--link .cursor-ring-inner {
+  animation: cursor-spin 2s linear infinite;
+  font-size: 11px;
+  color: #f5f0e8;
+}
+
+/* Hide cursor when leaving viewport or inactive */
+.cursor-hidden {
+  opacity: 0 !important;
+}

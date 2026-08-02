@@ -5,6 +5,7 @@ import { Layout } from './components/Layout';
 import { HeroCanvas } from './components/HeroCanvas';
 import { BentoGrid } from './components/BentoGrid';
 import { ContactPage } from './components/ContactPage';
+import { Cursor } from './components/Cursor';
 import { AnimatePresence } from 'framer-motion';
 import { Analytics } from "@vercel/analytics/react"
 
@@ -13,6 +14,7 @@ function App() {
 
   return (
     <StyleProvider>
+      <Cursor />
       <Layout 
         heroCanvas={<HeroCanvas />}
         onContactClick={() => setCurrentView('contact')}
