@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slipstream Gateway Case Study — Aum Pandya</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+    :root {
+      --color-sage: #4a5c4e;
+      --color-oatmeal: #f5f0e8;
+      --color-terracotta: #c1502a;
+      --color-charcoal: #1e1e1e;
+      
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-mono: 'Courier New', Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header Nav */
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.15);
+      background-color: var(--color-sage);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--color-terracotta);
+      border: 2px solid var(--color-charcoal);
+      color: var(--color-oatmeal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border-radius: 2px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--color-terracotta);
+    }
+
+    .cta-button {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-terracotta);
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-charcoal);
+      border-radius: 2px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background-color: var(--color-charcoal);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      padding: 5rem 0;
+      border-bottom: 2px solid var(--color-charcoal);
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--color-terracotta);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .hero-badge-row {
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-terracotta);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: rgba(245, 240, 232, 0.9);
+      max-width: 750px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-teammate-note {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: rgba(245, 240, 232, 0.75);
+      border-left: 3px solid var(--color-terracotta);
+      padding-left: 1rem;
+      margin-bottom: 2.5rem;
+      max-width: 750px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-primary, .cta-secondary {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 0.85rem 1.75rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .cta-primary {
+      background-color: var(--color-terracotta);
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-charcoal);
+    }
+
+    .cta-primary:hover {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+    }
+
+    .cta-secondary {
+      background-color: transparent;
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-oatmeal);
+    }
+
+    .cta-secondary:hover {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border-color: var(--color-oatmeal);
+    }
+
+    .stack-tags-row {
+      border-top: 1px solid rgba(245, 240, 232, 0.2);
+      padding-top: 1.5rem;
+    }
+
+    .stack-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(245, 240, 232, 0.5);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .stack-tags {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      color: var(--color-oatmeal);
+      line-height: 1.8;
+    }
+
+    /* Section styling */
+    section.details-section {
+      padding: 6rem 0;
+      border-bottom: 2px solid var(--color-charcoal);
+    }
+
+    section.bg-oatmeal {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+    }
+
+    section.bg-sage {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      border-bottom: 2px solid var(--color-oatmeal);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .bg-oatmeal .section-label {
+      color: var(--color-terracotta);
+    }
+
+    .bg-sage .section-label {
+      color: var(--color-oatmeal);
+      opacity: 0.8;
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Section 1 Layout */
+    .problem-layout {
+      display: flex;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .problem-text {
+      flex: 1.2;
+      min-width: 320px;
+    }
+
+    .problem-text p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: rgba(30, 30, 30, 0.9);
+    }
+
+    .stat-block {
+      flex: 0.8;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      background-color: rgba(30, 30, 30, 0.03);
+      padding: 2.5rem;
+      border: 2px solid var(--color-charcoal);
+      border-radius: 2px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 900;
+      color: var(--color-terracotta);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--color-charcoal);
+      letter-spacing: 0.05em;
+    }
+
+    /* Pipeline Architecture Grid */
+    .pipeline-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 3rem;
+      padding-bottom: 1rem;
+    }
+
+    .pipeline-grid {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 1rem;
+      min-width: 950px;
+      padding: 2.5rem 1.5rem;
+      border: 2px solid var(--color-oatmeal);
+      background-color: rgba(245, 240, 232, 0.04);
+      border-radius: 2px;
+    }
+
+    .pipeline-stage {
+      flex: 1;
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-charcoal);
+      border-radius: 2px;
+      padding: 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 4px 4px 0px 0px #1E1E1E;
+    }
+
+    .pipeline-stage.accent-stage {
+      border-color: var(--color-terracotta);
+      border-width: 3px;
+    }
+
+    .stage-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: var(--color-terracotta);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .stage-name {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: var(--color-charcoal);
+      margin-bottom: 0.75rem;
+    }
+
+    .stage-desc {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: rgba(30, 30, 30, 0.85);
+    }
+
+    .pipeline-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--color-terracotta);
+      padding: 0 0.25rem;
+    }
+
+    .pipeline-arrow-mobile {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--color-terracotta);
+      text-align: center;
+      margin: 0.5rem 0;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .challenge-card {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-charcoal);
+      border-left: 5px solid var(--color-terracotta);
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      border-radius: 2px;
+      box-shadow: 4px 4px 0px 0px #1E1E1E;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-terracotta);
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-body {
+      font-size: 0.925rem;
+      line-height: 1.6;
+      color: rgba(30, 30, 30, 0.85);
+    }
+
+    .card-body p {
+      margin-bottom: 0.75rem;
+    }
+
+    /* Dashboard preview block */
+    .dashboard-preview-card {
+      background-color: var(--color-charcoal);
+      border: 2px solid var(--color-oatmeal);
+      padding: 1.5rem;
+      border-radius: 2px;
+      margin-top: 2rem;
+      position: relative;
+      box-shadow: 6px 6px 0px 0px var(--color-terracotta);
+    }
+
+    .dashboard-preview-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid rgba(245, 240, 232, 0.2);
+    }
+
+    .dashboard-caption {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-oatmeal);
+      opacity: 0.85;
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Scope Note Box */
+    .scope-box {
+      background-color: rgba(245, 240, 232, 0.04);
+      border: 2px solid var(--color-terracotta);
+      padding: 2rem;
+      border-radius: 2px;
+      margin-top: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--color-oatmeal);
+    }
+
+    .scope-box-header {
+      font-weight: bold;
+      color: var(--color-terracotta);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Retrospective list */
+    .retro-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      max-width: 850px;
+    }
+
+    .retro-item {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-charcoal);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .retro-arrow {
+      color: var(--color-terracotta);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      padding: 5rem 0 3rem 0;
+      border-top: 2px solid var(--color-charcoal);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.15);
+      padding-bottom: 2.5rem;
+    }
+
+    .footer-link {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link.back-link {
+      color: var(--color-terracotta);
+    }
+
+    .footer-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(245, 240, 232, 0.5);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1.5rem 0;
+      }
+      .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .hero-title {
+        font-size: 2.75rem;
+      }
+      .hero-tagline {
+        font-size: 1.1rem;
+      }
+      section.details-section {
+        padding: 4rem 0;
+      }
+      .section-heading {
+        font-size: 2.25rem;
+        margin-bottom: 2rem;
+      }
+      .problem-layout {
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+      .stat-block {
+        padding: 1.75rem;
+      }
+      .pipeline-grid {
+        flex-direction: column;
+        min-width: unset;
+        width: 100%;
+        padding: 1.5rem 1rem;
+      }
+      .pipeline-arrow {
+        display: none;
+      }
+      .pipeline-arrow-mobile {
+        display: block;
+      }
+      .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <div class="logo-badge">α</div>
+        AUM PANDYA — MY PORTFOLIO
+      </a>
+      <nav>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#projects" class="nav-link">Projects</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="/Aum_Pandya_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
+        <a href="index.html#contact" class="cta-button">Get In Touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <span class="hero-label">PROJECT DEEP DIVE // 03</span>
+      
+      <div class="hero-badge-row">
+        <span class="hero-badge">⚡ LLM INFRASTRUCTURE & ROUTING</span>
+      </div>
+
+      <h1 class="hero-title">Slipstream Gateway</h1>
+      
+      <p class="hero-tagline">
+        Middleware sitting between applications and multiple LLM providers (Groq, Gemini, local Ollama) to drastically reduce latency and cost while guaranteeing high availability.
+      </p>
+
+      <div class="hero-teammate-note">
+        Co-authored project built with teammate <strong>Naitik Lavri</strong>. My ownership: Semantic cache core, intelligent model router, and fallback/circuit-breaker engine. Teammate owned: Observability dashboard and guardrails screening layer.
+      </div>
+
+      <div class="hero-ctas">
+        <a href="https://github.com/Aum3136/slipstream-gateway" target="_blank" rel="noopener noreferrer" class="cta-primary">VIEW GITHUB REPO →</a>
+        <a href="#overview-dashboard" class="cta-secondary">EXPLORE DASHBOARD ↓</a>
+      </div>
+
+      <div class="stack-tags-row">
+        <span class="stack-label">TECHNOLOGY STACK</span>
+        <div class="stack-tags">
+          FASTAPI · CHROMADB · REDIS (+FAKEREDIS) · SENTENCE-TRANSFORMERS · GROQ API · GEMINI API · OLLAMA (LOCAL) · SQLITE · DOCKER COMPOSE · STREAMLIT
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: The Problem -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 01 · THE PROBLEM</span>
+      <h2 class="section-heading">Direct LLM API calls overpay and break easily.</h2>
+      
+      <div class="problem-layout">
+        <div class="problem-text">
+          <p>
+            Teams connecting software directly to LLM providers face three structural flaws: they pay full rate for every single API request (even identical or near-duplicate prompts), have zero automatic failover when a provider is rate-limited (HTTP 429) or offline (HTTP 503), and send every prompt to the exact same heavy model regardless of request complexity.
+          </p>
+          <p>
+            Slipstream Gateway acts as intelligent, resilient middleware. By intercepting outgoing requests before hitting upstream APIs, it enforces zero-cost screening, vector similarity cache retrieval, tier-based model allocation, and per-provider circuit breaking without the application needing to know which provider served the response.
+          </p>
+        </div>
+        
+        <div class="stat-block">
+          <div class="stat-item">
+            <span class="stat-number">3 - 4 ms</span>
+            <span class="stat-label">Cache Hit Latency (vs 890ms live API call)</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">$0.000009</span>
+            <span class="stat-label">Min Cost per Simple Routed Request</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">3 Providers</span>
+            <span class="stat-label">Groq + Gemini + Local Ollama Chain</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Architecture -->
+  <section class="details-section bg-sage">
+    <div class="container">
+      <span class="section-label">// 02 · SYSTEM ARCHITECTURE</span>
+      <h2 class="section-heading">5-Stage Left-to-Right Request Pipeline.</h2>
+      <p style="max-width: 800px; opacity: 0.9; font-size: 1.05rem; margin-bottom: 2rem;">
+        Requests flow left-to-right through cheapest checks first. Bad requests get filtered at zero cost, cached answers return in single-digit milliseconds, and live requests route to the cheapest viable model.
+      </p>
+
+      <div class="pipeline-wrapper">
+        <div class="pipeline-grid">
+          <!-- Stage 1 -->
+          <div class="pipeline-stage">
+            <div>
+              <div class="stage-num">STAGE 01</div>
+              <div class="stage-name">Guardrails</div>
+            </div>
+            <div class="stage-desc">
+              Regex-based PII screening & prompt-injection filtering. Blocks malicious or invalid payloads before touching any model (0 cost).
+            </div>
+          </div>
+
+          <div class="pipeline-arrow">➔</div>
+          <div class="pipeline-arrow-mobile">⬇</div>
+
+          <!-- Stage 2 -->
+          <div class="pipeline-stage accent-stage">
+            <div>
+              <div class="stage-num">STAGE 02</div>
+              <div class="stage-name">Semantic Cache</div>
+            </div>
+            <div class="stage-desc">
+              Embeds prompt with sentence-transformers (all-MiniLM-L6-v2), searches ChromaDB at 0.80 cosine threshold, serves cached answer from Redis.
+            </div>
+          </div>
+
+          <div class="pipeline-arrow">➔</div>
+          <div class="pipeline-arrow-mobile">⬇</div>
+
+          <!-- Stage 3 -->
+          <div class="pipeline-stage">
+            <div>
+              <div class="stage-num">STAGE 03</div>
+              <div class="stage-name">Model Router</div>
+            </div>
+            <div class="stage-desc">
+              Classifies prompts into Simple / Medium / Complex based on length & content signals, routing easy queries to fast/cheap models.
+            </div>
+          </div>
+
+          <div class="pipeline-arrow">➔</div>
+          <div class="pipeline-arrow-mobile">⬇</div>
+
+          <!-- Stage 4 -->
+          <div class="pipeline-stage">
+            <div>
+              <div class="stage-num">STAGE 04</div>
+              <div class="stage-name">Fallback Engine</div>
+            </div>
+            <div class="stage-desc">
+              Walks ordered provider chain per tier (e.g., Groq → Gemini Flash → Gemini Pro) with per-provider circuit breakers & 30s cooldowns.
+            </div>
+          </div>
+
+          <div class="pipeline-arrow">➔</div>
+          <div class="pipeline-arrow-mobile">⬇</div>
+
+          <!-- Stage 5 -->
+          <div class="pipeline-stage">
+            <div>
+              <div class="stage-num">STAGE 05</div>
+              <div class="stage-name">Observability</div>
+            </div>
+            <div class="stage-desc">
+              Logs tier, provider, latency, cost, and hit/miss to SQLite. Dashboard visualizes real-time request feed and cost metrics.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Technical Depth -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 03 · WHAT I ACTUALLY BUILT</span>
+      <h2 class="section-heading">Core engineering & architectural decisions.</h2>
+      
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <div class="challenge-card">
+          <div class="card-tag">DATABASE ARCHITECTURE</div>
+          <h3 class="card-title">Two-Store Cache Architecture</h3>
+          <div class="card-body">
+            <p>
+              Separated vector indexing from payload storage: <strong>ChromaDB</strong> manages high-dimensional vector similarity indexing while <strong>Redis</strong> stores raw response completion payloads.
+            </p>
+            <p>
+              Vector databases are optimized for nearest-neighbor search rather than large blob key-value storage. By indexing vector embeddings in ChromaDB and storing response blobs in Redis, query lookup and retrieval remain ultra-fast at scale.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="challenge-card">
+          <div class="card-tag">SYSTEM RESILIENCE</div>
+          <h3 class="card-title">Zero-Dependency Graceful Degradation</h3>
+          <div class="card-body">
+            <p>
+              Built dual fallback mechanisms for local execution resilience: if <code>sentence-transformers</code> model weights cannot download, the pipeline switches to an offline hashing-based embedder.
+            </p>
+            <p>
+              If a Redis server is unreachable, the system seamlessly falls back to an in-memory <code>fakeredis</code> instance. The entire 5-stage pipeline can run locally with zero external network or service dependencies.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="challenge-card">
+          <div class="card-tag">FAULT TOLERANCE</div>
+          <h3 class="card-title">Per-Provider Circuit Breaker Pattern</h3>
+          <div class="card-body">
+            <p>
+              Implemented explicit finite state machine states (Closed, Open, Half-Open) evaluated individually per provider tier rather than globally across the gateway.
+            </p>
+            <p>
+              When a provider hits consecutive rate limits (3 failures), its circuit opens for a 30-second cooldown period. Because breaker state is scoped per-provider, a dead provider (e.g. Groq 429) never blocks traffic from routing to healthy alternatives (e.g. Gemini or local Ollama).
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="challenge-card">
+          <div class="card-tag">DEVELOPER EXPERIENCE</div>
+          <h3 class="card-title">Deterministic Offline Mock Mode</h3>
+          <div class="card-body">
+            <p>
+              Architected a full offline mock mode where the complete 5-stage pipeline runs end-to-end with zero API keys using deterministic fake completions.
+            </p>
+            <p>
+              This allows developers to build, test, and run CI integration suites without incurring upstream API charges or requiring internet connectivity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Real Dashboard Preview -->
+  <section class="details-section bg-sage" id="overview-dashboard">
+    <div class="container">
+      <span class="section-label">// 04 · REAL DASHBOARD PREVIEW</span>
+      <h2 class="section-heading">Live request feed & observability dashboard.</h2>
+      
+      <div class="dashboard-preview-card">
+        <img src="/slipstream_mockup.png" alt="Slipstream Gateway Overview Dashboard Mockup" />
+        <div class="dashboard-caption">
+          <strong>Overview Dashboard Preview (localhost:3000):</strong> Displays real-time request feeds, tier classification badges (Simple / Medium / Complex), provider routing (Groq, Gemini Flash, local Ollama), 3-4ms cache hit response times vs 42-890ms live calls, and per-request cost monitoring down to $0.000009.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Tech Stack & Scope -->
+  <section class="details-section bg-sage">
+    <div class="container">
+      <span class="section-label">// 05 · TECH STACK & HONEST SCOPE</span>
+      <h2 class="section-heading">Engineering stack & project scope note.</h2>
+      
+      <div class="stack-tags-row" style="border-top: none; padding-top: 0; margin-bottom: 2.5rem;">
+        <span class="stack-label">COMPLETE STACK</span>
+        <div class="stack-tags" style="font-size: 0.95rem;">
+          FASTAPI · CHROMADB · REDIS (+FAKEREDIS) · SENTENCE-TRANSFORMERS · GROQ API · GEMINI API · OLLAMA (LOCAL) · SQLITE · DOCKER COMPOSE · STREAMLIT
+        </div>
+      </div>
+
+      <div class="scope-box">
+        <div class="scope-box-header">HONEST SCOPE NOTE</div>
+        Router classification and guardrail detection are currently rule-based (regex/heuristics), not ML-trained — accurately described as LLM infrastructure/orchestration, not a machine learning project. Benchmarking against a no-gateway baseline is in progress.
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Lessons & Retrospective -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 06 · LESSONS & RETROSPECTIVE</span>
+      <h2 class="section-heading">What building LLM infrastructure taught me.</h2>
+
+      <ul class="retro-list">
+        <li class="retro-item">
+          <span class="retro-arrow">➔</span>
+          <div>
+            <strong>"Infrastructure" doesn't mean "machine learning" at every layer:</strong> The router and guardrails run on regex and length heuristics, not trained models — and that's fine. The harder engineering call wasn't writing a classifier, it was deciding which layer actually needed one. A vector-similarity cache is a real ML problem worth solving with embeddings. Sorting a prompt into "simple vs complex" is not — a heuristic gets 90% of the value at 0% of the training cost.
+          </div>
+        </li>
+        <li class="retro-item">
+          <span class="retro-arrow">➔</span>
+          <div>
+            <strong>A cache is only as good as its false-positive rate:</strong> The dangerous failure mode isn't a cache miss — it's a cache serving the wrong answer with full confidence because the similarity threshold was too loose. Tuning 0.80 cosine similarity meant testing genuine paraphrases against genuinely different questions, not just checking that identical prompts hit.
+          </div>
+        </li>
+        <li class="retro-item">
+          <span class="retro-arrow">➔</span>
+          <div>
+            <strong>Free-tier providers force you to build resilience you'd otherwise skip:</strong> Building on Groq/Gemini/Ollama instead of OpenAI meant real rate limits and real outages during dev — which is exactly why the circuit breaker exists per-provider, not globally. One dead provider doesn't get to take down the other two.
+          </div>
+        </li>
+        <li class="retro-item">
+          <span class="retro-arrow">➔</span>
+          <div>
+            <strong>Mock mode wasn't a shortcut — it was a design requirement:</strong> Being able to run the entire 5-stage pipeline with zero API keys meant the architecture had to be provider-agnostic from day one, not bolted on later. That constraint caught bugs in the fallback chain before a single real API call was made.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="knowbot.html" class="footer-link back-link">← VIEW KNOWBOT CASE STUDY</a>
+        <a href="index.html#projects" class="footer-link">BACK TO PORTFOLIO</a>
+        <a href="nutriscan.html" class="footer-link back-link">VIEW NUTRISCANN CASE STUDY →</a>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-text">
+          AUM PANDYA © 2026 — HAND-CRAFTED WITH SAGE, OATMEAL &amp; TERRACOTTA
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

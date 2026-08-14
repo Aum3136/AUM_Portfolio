@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnowBot Case Study — Aum Pandya</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+    :root {
+      --color-sage: #4a5c4e;
+      --color-oatmeal: #f5f0e8;
+      --color-terracotta: #c1502a;
+      --color-charcoal: #1e1e1e;
+      
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-mono: 'Courier New', Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header Nav */
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.15);
+      background-color: var(--color-sage);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--color-terracotta);
+      border: 2px solid var(--color-charcoal);
+      color: var(--color-oatmeal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border-radius: 2px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--color-terracotta);
+    }
+
+    .cta-button {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-terracotta);
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-charcoal);
+      border-radius: 2px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background-color: var(--color-charcoal);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      padding: 5rem 0;
+      border-bottom: 2px solid var(--color-charcoal);
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--color-terracotta);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .hero-badge-row {
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-terracotta);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: rgba(245, 240, 232, 0.9);
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-primary, .cta-secondary {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 0.85rem 1.75rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .cta-primary {
+      background-color: var(--color-terracotta);
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-charcoal);
+    }
+
+    .cta-primary:hover {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+    }
+
+    .cta-secondary {
+      background-color: transparent;
+      color: var(--color-oatmeal);
+      border: 2px solid var(--color-oatmeal);
+    }
+
+    .cta-secondary:hover {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border-color: var(--color-oatmeal);
+    }
+
+    .stack-tags-row {
+      border-top: 1px solid rgba(245, 240, 232, 0.2);
+      padding-top: 1.5rem;
+    }
+
+    .stack-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(245, 240, 232, 0.5);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .stack-tags {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      color: var(--color-oatmeal);
+      line-height: 1.8;
+    }
+
+    /* Section styling */
+    section.details-section {
+      padding: 6rem 0;
+      border-bottom: 2px solid var(--color-charcoal);
+    }
+
+    section.bg-oatmeal {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+    }
+
+    section.bg-sage {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      border-bottom: 2px solid var(--color-oatmeal);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .bg-oatmeal .section-label {
+      color: var(--color-terracotta);
+    }
+
+    .bg-sage .section-label {
+      color: var(--color-oatmeal);
+      opacity: 0.8;
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Section 1 Layout */
+    .problem-layout {
+      display: flex;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .problem-text {
+      flex: 1.2;
+      min-width: 320px;
+    }
+
+    .problem-text p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: rgba(30, 30, 30, 0.9);
+    }
+
+    .stat-block {
+      flex: 0.8;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      background-color: rgba(30, 30, 30, 0.03);
+      padding: 2.5rem;
+      border: 2px solid var(--color-charcoal);
+      border-radius: 2px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 900;
+      color: var(--color-terracotta);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--color-charcoal);
+      letter-spacing: 0.05em;
+    }
+
+    /* Section 2 Architecture Diagram */
+    .arch-diagram-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 3rem;
+      padding-bottom: 1rem;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 80px 2fr 80px 2fr;
+      grid-template-rows: auto 40px auto 40px auto 40px auto 40px auto;
+      gap: 0;
+      align-items: center;
+      justify-items: center;
+      min-width: 800px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      border: 2px solid var(--color-oatmeal);
+      background-color: rgba(245, 240, 232, 0.04);
+      border-radius: 2px;
+    }
+
+    .arch-box {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-charcoal);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 1rem 1.25rem;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+    }
+
+    .arch-box.accent-box {
+      border-color: var(--color-terracotta);
+      background-color: var(--color-oatmeal);
+      color: var(--color-terracotta);
+      border-width: 3px;
+    }
+
+    .arch-arrow {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--color-terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arch-arrow-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--color-oatmeal);
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+      text-align: center;
+    }
+
+    .arch-arrow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arch-arrow-mobile {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--color-terracotta);
+      margin: 0.5rem 0;
+      text-align: center;
+    }
+
+    /* Section 3 Layout */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .challenge-card {
+      background-color: var(--color-oatmeal);
+      color: var(--color-charcoal);
+      border: 2px solid var(--color-charcoal);
+      border-left: 4px solid var(--color-terracotta);
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      border-radius: 2px;
+      min-height: 280px;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-terracotta);
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(30, 30, 30, 0.85);
+    }
+
+    /* Section 4 Layout */
+    .sdg-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      max-width: 900px;
+    }
+
+    .sdg-body {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(245, 240, 232, 0.95);
+    }
+
+    .sdg-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .quote-block {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--color-terracotta);
+      border-left: 3px solid var(--color-terracotta);
+      padding-left: 2rem;
+      margin: 2rem 0;
+    }
+
+    /* Section 5 Layout */
+    .retro-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      max-width: 850px;
+    }
+
+    .retro-item {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-charcoal);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .retro-arrow {
+      color: var(--color-terracotta);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--color-sage);
+      color: var(--color-oatmeal);
+      padding: 5rem 0 3rem 0;
+      border-top: 2px solid var(--color-charcoal);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.15);
+      padding-bottom: 2.5rem;
+    }
+
+    .footer-link {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link.back-link {
+      color: var(--color-terracotta);
+    }
+
+    .footer-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(245, 240, 232, 0.5);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1.5rem 0;
+      }
+      .nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .hero-title {
+        font-size: 2.75rem;
+      }
+      .hero-tagline {
+        font-size: 1.1rem;
+      }
+      section.details-section {
+        padding: 4rem 0;
+      }
+      .section-heading {
+        font-size: 2.25rem;
+        margin-bottom: 2rem;
+      }
+      .problem-layout {
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+      .stat-block {
+        padding: 1.75rem;
+      }
+      .quote-block {
+        font-size: 1.45rem;
+        padding-left: 1.25rem;
+      }
+
+      /* Stacking architecture diagram on mobile */
+      .arch-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        min-width: unset;
+        width: 100%;
+        padding: 1.5rem 1rem;
+      }
+      .arch-box {
+        width: 100%;
+        height: auto;
+        padding: 1rem 0.5rem;
+      }
+      .arch-grid > .arch-arrow-container, 
+      .arch-grid > .arch-arrow {
+        display: none;
+      }
+      .arch-arrow-mobile {
+        display: block;
+      }
+      .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">
+        <div class="logo-badge">α</div>
+        AUM PANDYA — MY PORTFOLIO
+      </a>
+      <nav>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#projects" class="nav-link">Projects</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="index.html#contact" class="cta-button">Get In Touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <span class="hero-label">PROJECT DEEP DIVE // 01</span>
+      
+      <div class="hero-badge-row">
+        <span class="hero-badge">🏆 GOOGLE SOLUTION CHALLENGE 2026</span>
+      </div>
+
+      <h1 class="hero-title">KnowBot</h1>
+      
+      <p class="hero-tagline">
+        Enterprise RAG knowledge management for Indian IT SMEs — where tribal knowledge goes to survive.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="https://knowbot3136.vercel.app" target="_blank" rel="noopener noreferrer" class="cta-primary">VISIT LIVE →</a>
+        <a href="https://github.com/Aum3136/KnowBot" target="_blank" rel="noopener noreferrer" class="cta-secondary">VIEW GITHUB →</a>
+      </div>
+
+      <div class="stack-tags-row">
+        <span class="stack-label">TECHNOLOGY STACK</span>
+        <div class="stack-tags">
+          FASTAPI · LANGCHAIN · GEMINI 2.0 FLASH · QDRANT · SARVAM AI · AWS S3 · AWS EC2 · VERCEL
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: The Problem -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 01 · THE PROBLEM</span>
+      <h2 class="section-heading">Tribal knowledge is a liability.</h2>
+      
+      <div class="problem-layout">
+        <div class="problem-text">
+          <p>
+            In most Indian IT SMEs, critical knowledge lives in one senior engineer's head. When they quit — and they always quit — that knowledge walks out with them. No documentation, no handover, no system. Just a new hire asking the same questions for the next six months.
+          </p>
+          <p>
+            KnowBot was built for SDG 8: Decent Work and Economic Growth. The thesis: give small teams an enterprise-grade knowledge management system that actually works in Indian languages, on Indian internet, for Indian company budgets.
+          </p>
+        </div>
+        
+        <div class="stat-block">
+          <div class="stat-item">
+            <span class="stat-number">₹0 / month</span>
+            <span class="stat-label">infra cost on free tier</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">&lt; 1.2s</span>
+            <span class="stat-label">average RAG response time</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">Hindi + English</span>
+            <span class="stat-label">language support via Sarvam AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Architecture -->
+  <section class="details-section bg-sage">
+    <div class="container">
+      <span class="section-label">// 02 · SYSTEM ARCHITECTURE</span>
+      <h2 class="section-heading">How it actually works.</h2>
+
+      <div class="arch-diagram-wrapper">
+        <div class="arch-grid">
+          <!-- Desktop Grid layout -->
+          
+          <!-- Row 1: Voice Pipeline Ingestion -->
+          <div class="arch-box" style="grid-column: 1; grid-row: 1;">MIC</div>
+          
+          <div class="arch-arrow-container" style="grid-column: 2; grid-row: 1;">
+            <span class="arch-arrow-label">audio</span>
+            <div class="arch-arrow">➔</div>
+          </div>
+          
+          <div class="arch-box" style="grid-column: 3; grid-row: 1;">SARVAM AI STT</div>
+          
+          <div class="arch-arrow-container" style="grid-column: 4; grid-row: 1;">
+            <span class="arch-arrow-label">text</span>
+            <div class="arch-arrow">➔</div>
+          </div>
+          
+          <!-- Spanning Backend across rows 1 & 3 -->
+          <div class="arch-box accent-box" style="grid-column: 5; grid-row: 1 / span 3; height: 100%; min-height: 140px;">
+            FASTAPI BACKEND
+          </div>
+
+          <!-- Mobile arrow between MIC and STT -->
+          <div class="arch-arrow-mobile" style="order: 1;">⬇ (audio)</div>
+          <!-- Mobile STT box placement -->
+          <!-- Mobile arrow between STT and Backend -->
+          <div class="arch-arrow-mobile" style="order: 2;">⬇ (text)</div>
+
+          <!-- Row 2: Connecting Voice STT Row to Fe Row -->
+          <!-- Desktop spacer row -->
+
+          <!-- Row 3: Standard Web Pipeline -->
+          <div class="arch-box" style="grid-column: 1; grid-row: 3;">USER</div>
+          
+          <div class="arch-arrow-container" style="grid-column: 2; grid-row: 3;">
+            <span class="arch-arrow-label">query</span>
+            <div class="arch-arrow">➔</div>
+          </div>
+          
+          <div class="arch-box" style="grid-column: 3; grid-row: 3;">REACT FRONTEND</div>
+          
+          <div class="arch-arrow-container" style="grid-column: 4; grid-row: 3;">
+            <span class="arch-arrow-label">HTTP</span>
+            <div class="arch-arrow">➔</div>
+          </div>
+
+          <!-- Mobile arrow between USER and FRONTEND -->
+          <div class="arch-arrow-mobile" style="order: 3;">⬇ (query)</div>
+          <!-- Mobile arrow between FRONTEND and BACKEND -->
+          <div class="arch-arrow-mobile" style="order: 4;">⬇ (HTTP request)</div>
+
+          <!-- Row 4: Backend to LangChain RAG -->
+          <div class="arch-arrow-container" style="grid-column: 5; grid-row: 4; height: 40px;">
+            <div class="arch-arrow">⬇</div>
+          </div>
+          
+          <div class="arch-arrow-mobile" style="order: 5;">⬇</div>
+
+          <!-- Row 5: LangChain RAG Pipeline -->
+          <div class="arch-box" style="grid-column: 3 / span 3; grid-row: 5;">
+            LANGCHAIN RAG PIPELINE
+          </div>
+
+          <div class="arch-arrow-mobile" style="order: 6;">⬇</div>
+
+          <!-- Row 6: RAG Split to DB / LLM -->
+          <div class="arch-arrow-container" style="grid-column: 3; grid-row: 6; height: 40px;">
+            <div class="arch-arrow">⬇</div>
+          </div>
+          <div class="arch-arrow-container" style="grid-column: 5; grid-row: 6; height: 40px;">
+            <div class="arch-arrow">⬇</div>
+          </div>
+
+          <!-- Row 7: DB and LLM Boxes -->
+          <div class="arch-box" style="grid-column: 3; grid-row: 7;">QDRANT DB</div>
+          <div class="arch-box" style="grid-column: 5; grid-row: 7;">GEMINI 2.0 FLASH</div>
+
+          <div class="arch-arrow-mobile" style="order: 7;">⬇ (dense vectors)</div>
+          <div class="arch-arrow-mobile" style="order: 8;">⬇ (context + prompt)</div>
+
+          <!-- Row 8: S3 Ingestion connection -->
+          <div class="arch-arrow-container" style="grid-column: 3; grid-row: 8; height: 40px;">
+            <div class="arch-arrow">⬆</div>
+          </div>
+          
+          <div class="arch-arrow-mobile" style="order: 9;">⬆ (document sync)</div>
+
+          <!-- Row 9: S3 Docs -->
+          <div class="arch-box" style="grid-column: 3; grid-row: 9;">AWS S3 (docs)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: The Hard Parts -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 03 · WHAT ACTUALLY WENT WRONG</span>
+      <h2 class="section-heading">The problems nobody writes tutorials about.</h2>
+      
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <div class="challenge-card">
+          <span class="card-tag">AUDIO PIPELINE</span>
+          <h3 class="card-title">Sarvam AI's 30-second limit</h3>
+          <p class="card-body">
+            Sarvam's STT API hard-caps audio at 30 seconds. Long voice queries got silently truncated. Fixed by chunking WAV audio at 28-second intervals via pydub and stitching transcripts on the backend.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="challenge-card">
+          <span class="card-tag">VECTOR DB</span>
+          <h3 class="card-title">Qdrant payload index requirements</h3>
+          <p class="card-body">
+            Qdrant throws silent failures if you filter on a field without a payload index. Spent hours debugging empty results before finding the missing create_payload_index() call in the docs footnotes.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="challenge-card">
+          <span class="card-tag">AUDIO FORMAT</span>
+          <h3 class="card-title">WebM vs WAV sample rate mismatch</h3>
+          <p class="card-body">
+            Browser MediaRecorder outputs WebM at 48kHz. Sarvam expects 16kHz WAV. Every transcript came back as noise until pydub resampling was added to the ingestion pipeline.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Google Solution Challenge -->
+  <section class="details-section bg-sage">
+    <div class="container">
+      <span class="section-label">// 04 · GOOGLE SOLUTION CHALLENGE 2026</span>
+      <h2 class="section-heading">Built under SDG 8.</h2>
+      
+      <div class="sdg-layout">
+        <div class="sdg-body">
+          <p>
+            KnowBot was submitted to Google Solution Challenge 2026 — a global competition for student developers building on Google technology to address the UN Sustainable Development Goals. KnowBot targeted SDG 8: Decent Work and Economic Growth, with the argument that knowledge retention directly impacts productivity and job quality in growing economies.
+          </p>
+          <p>
+            Stack alignment with Google: Gemini 2.0 Flash as the LLM backbone, deployed on GCP-adjacent infrastructure.
+          </p>
+        </div>
+
+        <blockquote class="quote-block">
+          "The hardest part wasn't the RAG pipeline — it was getting Sarvam AI's STT to handle Gujarati-accented Hindi without hallucinating entire sentences."
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Retrospective -->
+  <section class="details-section bg-oatmeal">
+    <div class="container">
+      <span class="section-label">// 05 · RETROSPECTIVE</span>
+      <h2 class="section-heading">If I built this again.</h2>
+      
+      <ul class="retro-list">
+        <li class="retro-item">
+          <span class="retro-arrow">→</span>
+          <div>
+            Start with Qdrant local Docker from day one. Free-tier cloud clusters get deleted after inactivity and you lose all your vectors.
+          </div>
+        </li>
+        <li class="retro-item">
+          <span class="retro-arrow">→</span>
+          <div>
+            Abstract the STT provider behind an interface. Sarvam works for Hindi but swapping it out later meant touching too many layers.
+          </div>
+        </li>
+        <li class="retro-item">
+          <span class="retro-arrow">→</span>
+          <div>
+            Add document re-ingestion as a scheduled job, not a manual CLI command. Users don't run CLI commands.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="index.html" class="footer-link back-link">← BACK TO PROJECTS</a>
+        <a href="nutriscan.html" class="footer-link">NEXT: NUTRISCAN →</a>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-text">// KNOWBOT · CASE STUDY · AUM PANDYA · 2026</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
