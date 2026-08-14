@@ -5,10 +5,22 @@ import './ProjectRowList.css';
 import knowbotMockup from '../assets/knowbot_mockup.png';
 import nutriscannMockup from '../assets/nutriscann_mockup.png';
 import medicoreMockup from '../assets/medicore_mockup.png';
+import slipstreamMockup from '../assets/slipstream_mockup.png';
 
 const projects = [
   {
     number: '01',
+    year: '2026',
+    name: 'Slipstream Gateway',
+    category: 'LLM INFRASTRUCTURE · ROUTING',
+    stack: ['FastAPI', 'ChromaDB', 'Redis'],
+    caseStudyLink: '/slipstream.html',
+    gitHub: 'https://github.com/Aum3136/slipstream-gateway',
+    badge: 'LLM ROUTER & CACHE',
+    imageUrl: slipstreamMockup,
+  },
+  {
+    number: '02',
     year: '2025',
     name: 'KnowBot',
     category: 'AI / ENTERPRISE RAG',
@@ -19,7 +31,7 @@ const projects = [
     imageUrl: knowbotMockup,
   },
   {
-    number: '02',
+    number: '03',
     year: '2025',
     name: 'NutriScann',
     category: 'AI VISION · COLLAB',
@@ -29,7 +41,7 @@ const projects = [
     imageUrl: nutriscannMockup,
   },
   {
-    number: '03',
+    number: '04',
     year: '2025',
     name: 'Cafe Software',
     category: 'FULLSTACK SAAS',
@@ -39,7 +51,7 @@ const projects = [
     imageUrl: null,
   },
   {
-    number: '04',
+    number: '05',
     year: '2024',
     name: 'MediCore / Healix',
     category: 'DBMS · UNIVERSITY',

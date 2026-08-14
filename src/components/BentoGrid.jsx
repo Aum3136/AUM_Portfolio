@@ -22,6 +22,7 @@ function timeAgo(dateString) {
 import knowbotMockup from '../assets/knowbot_mockup.png';
 import nutriscannMockup from '../assets/nutriscann_mockup.png';
 import medicoreMockup from '../assets/medicore_mockup.png';
+import slipstreamMockup from '../assets/slipstream_mockup.png';
 import avatarImage from '../assets/avatar.jpg';
 
 export function BentoGrid({ onContactClick }) {
@@ -340,13 +341,36 @@ export function BentoGrid({ onContactClick }) {
           <div className="flex-1 h-0.5 bg-oatmeal/20"></div>
         </div>
         <p className="text-oatmeal/75 text-xs font-mono mb-8 uppercase tracking-widest">
-          3 projects · 2024-2026 · hover the cards. they do a little thing.
+          4 projects · 2024-2026 · hover the cards. they do a little thing.
         </p>
       </div>
 
       {/* 4. Projects Cards Grid */}
       <div className="col-span-1 md:col-span-3 flex flex-col gap-8">
-        {/* Card 1: KnowBot (full-width) */}
+        {/* Card 1: Slipstream Gateway (full-width) */}
+        <motion.div variants={itemVariants} className="w-full">
+          <ProjectCard 
+            year="2026"
+            category="LLM INFRASTRUCTURE / ROUTING"
+            title="Slipstream Gateway"
+            description="High-performance LLM middleware sitting between applications and multiple providers (Groq, Gemini, local Ollama). Reduces cost and latency while eliminating downtime risks through semantic caching, intelligent model routing, and automatic per-provider circuit breaking. Built with teammate Naitik Lavri."
+            quote="Separating vector similarity search in ChromaDB from response payload storage in Redis kept semantic cache lookups under 4ms."
+            highlights={[
+              "Architected a 5-stage pipeline with zero-cost guardrails screening and sentence-transformers semantic cache (0.80 cosine threshold).",
+              "Implemented granular per-provider circuit breakers (Open/Half-Open/Closed) and zero-dependency offline mock fallbacks."
+            ]}
+            tags={["FASTAPI", "CHROMADB", "REDIS", "SENTENCE-TRANSFORMERS", "GROQ API", "GEMINI API", "OLLAMA", "DOCKER COMPOSE"]}
+            linkText="VIEW ON GITHUB ↗"
+            link="https://github.com/Aum3136/slipstream-gateway"
+            caseStudyLink="slipstream.html"
+            index="01 / 04"
+            theme="light"
+            imageUrl={slipstreamMockup}
+            hasTapeLeft={true}
+          />
+        </motion.div>
+
+        {/* Card 2: KnowBot (full-width) */}
         <motion.div variants={itemVariants} className="w-full">
           <ProjectCard 
             year="2025"
@@ -362,14 +386,14 @@ export function BentoGrid({ onContactClick }) {
             linkText="VIEW ON GITHUB ↗"
             link="https://github.com/Aum3136/KnowBot"
             caseStudyLink="knowbot.html"
-            index="01 / 03"
-            theme="light"
+            index="02 / 04"
+            theme="dark"
             imageUrl={knowbotMockup}
-            hasTapeLeft={true}
+            hasTapeRight={true}
           />
         </motion.div>
 
-        {/* Card 2: NutriScann (full-width) */}
+        {/* Card 3: NutriScann (full-width) */}
         <motion.div variants={itemVariants} className="w-full">
           <ProjectCard 
             year="2025"
@@ -385,14 +409,14 @@ export function BentoGrid({ onContactClick }) {
             linkText="VIEW ON GITHUB ↗"
             link="https://github.com/Aum3136/NutriScann"
             caseStudyLink="nutriscan.html"
-            index="02 / 03"
-            theme="dark"
+            index="03 / 04"
+            theme="light"
             imageUrl={nutriscannMockup}
-            hasTapeRight={true}
+            hasTapeLeft={true}
           />
         </motion.div>
 
-        {/* Card 3: MediCore / Healix (full-width) */}
+        {/* Card 4: MediCore / Healix (full-width) */}
         <motion.div variants={itemVariants} className="w-full">
           <ProjectCard 
             year="2024"
@@ -407,10 +431,9 @@ export function BentoGrid({ onContactClick }) {
             tags={["PHP", "MYSQL", "HTML / CSS / JS", "XAMPP", "PL/SQL"]}
             linkText="PRIVATE REPO —"
             link="#"
-            index="03 / 03"
+            index="04 / 04"
             theme="accent"
             imageUrl={medicoreMockup}
-            hasTapeLeft={true}
             hasTapeRight={true}
           />
         </motion.div>
