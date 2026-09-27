@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 export function ProjectCard({ 
   year,
   category,
+  badge,
   title,
   description,
   quote,
@@ -73,9 +74,16 @@ export function ProjectCard({
 
           <div>
             {/* Top Meta info */}
-            <div className="flex justify-between items-center mb-4 font-mono text-[10px] tracking-widest uppercase opacity-80">
-              <span className="px-2 py-0.5 border border-current font-bold">{year}</span>
-              <span>{category}</span>
+            <div className="flex justify-between items-center flex-wrap gap-2 mb-4 font-mono text-[10px] tracking-widest uppercase">
+              <div className="flex items-center flex-wrap gap-2">
+                <span className="px-2 py-0.5 border border-current font-bold opacity-80">{year}</span>
+                {badge && (
+                  <span className="px-2.5 py-0.5 bg-oatmeal text-terracotta border border-terracotta font-bold rounded-full text-[9px] tracking-wider">
+                    {badge}
+                  </span>
+                )}
+              </div>
+              <span className="opacity-80">{category}</span>
             </div>
 
             {/* Title & Body */}

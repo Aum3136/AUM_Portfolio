@@ -6,6 +6,7 @@ import knowbotMockup from '../assets/knowbot_mockup.png';
 import nutriscannMockup from '../assets/nutriscann_mockup.png';
 import medicoreMockup from '../assets/medicore_mockup.png';
 import slipstreamMockup from '../assets/slipstream_mockup.png';
+import sahyogMockup from '../assets/sahyog_mockup.png';
 
 const projects = [
   {
@@ -42,6 +43,17 @@ const projects = [
   },
   {
     number: '04',
+    year: '2026',
+    name: 'Sahyog',
+    category: 'AI / GOVTECH',
+    stack: ['React 18', 'FastAPI', 'Qdrant', 'Gemini'],
+    caseStudyLink: '#',
+    gitHub: 'https://github.com/Aum3136/Sahyog',
+    badge: 'SIH 2026',
+    imageUrl: sahyogMockup,
+  },
+  {
+    number: '05',
     year: '2025',
     name: 'Cafe Software',
     category: 'FULLSTACK SAAS',
@@ -51,7 +63,7 @@ const projects = [
     imageUrl: null,
   },
   {
-    number: '05',
+    number: '06',
     year: '2024',
     name: 'MediCore / Healix',
     category: 'DBMS · UNIVERSITY',

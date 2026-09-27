@@ -23,6 +23,7 @@ import knowbotMockup from '../assets/knowbot_mockup.png';
 import nutriscannMockup from '../assets/nutriscann_mockup.png';
 import medicoreMockup from '../assets/medicore_mockup.png';
 import slipstreamMockup from '../assets/slipstream_mockup.png';
+import sahyogMockup from '../assets/sahyog_mockup.png';
 import avatarImage from '../assets/avatar.jpg';
 
 export function BentoGrid({ onContactClick }) {
@@ -341,7 +342,7 @@ export function BentoGrid({ onContactClick }) {
           <div className="flex-1 h-0.5 bg-oatmeal/20"></div>
         </div>
         <p className="text-oatmeal/75 text-xs font-mono mb-8 uppercase tracking-widest">
-          4 projects · 2024-2026 · hover the cards. they do a little thing.
+          4 PROJECTS · 2024-2026 · HOVER THE CARDS. THEY DO A LITTLE THING.
         </p>
       </div>
 
@@ -375,6 +376,7 @@ export function BentoGrid({ onContactClick }) {
           <ProjectCard 
             year="2025"
             category="AI / ENTERPRISE"
+            badge="GOOGLE SOLUTION CHALLENGE 2026"
             title="KnowBot"
             description="Enterprise knowledge management platform built for Indian IT SMEs — the kind of companies where tribal knowledge lives inside one guy's head and he's about to quit. Upload docs, ask questions in plain English (or Hindi), get answers that actually cite sources. Built for Google Solution Challenge 2026 under SDG 8. Deployed. Real users. Actual stakes."
             quote="The hardest part wasn't the RAG pipeline — it was getting Sarvam AI's STT to handle Gujarati-accented Hindi without hallucinating entire sentences."
@@ -416,7 +418,31 @@ export function BentoGrid({ onContactClick }) {
           />
         </motion.div>
 
-        {/* Card 4: MediCore / Healix (full-width) */}
+        {/* Card 4: Sahyog (full-width) */}
+        <motion.div variants={itemVariants} className="w-full">
+          <ProjectCard 
+            year="2026"
+            category="AI / GOVTECH"
+            badge="SIH 2026"
+            title="Sahyog"
+            description="AI-powered disability assessment platform built for Smart India Hackathon 2026 under Problem Statement CHA-19. Two modules: an AI assessment engine using WHODAS 2.0 standards with RAG-powered context, and an EOC Admin Suite for RPwD compliance auditing. Built for real government workflow — not a prototype, a system."
+            quote="We filtered 262 problem statements to land on CHA-19. The hardest part was making WHODAS 2.0 scoring feel human, not clinical."
+            highlights={[
+              "Built AI assessment engine using WHODAS 2.0 + RAG pipeline + Google Gemini for contextual scoring",
+              "Designed EOC Admin Suite with full RPwD compliance audit trail"
+            ]}
+            tags={["REACT 18", "TYPESCRIPT", "FASTAPI", "SQLITE", "QDRANT", "SENTENCE-TRANSFORMERS", "GEMINI", "TAILWIND"]}
+            linkText="VIEW ON GITHUB ↗"
+            link="https://github.com/Aum3136/Sahyog"
+            caseStudyLink="#"
+            index="04 / 04"
+            theme="dark"
+            imageUrl={sahyogMockup}
+            hasTapeRight={true}
+          />
+        </motion.div>
+
+        {/* Card 5: MediCore / Healix (full-width) */}
         <motion.div variants={itemVariants} className="w-full">
           <ProjectCard 
             year="2024"
@@ -431,10 +457,10 @@ export function BentoGrid({ onContactClick }) {
             tags={["PHP", "MYSQL", "HTML / CSS / JS", "XAMPP", "PL/SQL"]}
             linkText="PRIVATE REPO —"
             link="#"
-            index="04 / 04"
+            index="05 / 05"
             theme="accent"
             imageUrl={medicoreMockup}
-            hasTapeRight={true}
+            hasTapeLeft={true}
           />
         </motion.div>
       </div>
