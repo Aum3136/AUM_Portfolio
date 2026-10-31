@@ -5,8 +5,10 @@ import { CurrentlyBuildingCard } from './CurrentlyBuildingCard';
 import { Coffee, Layers, Sparkles, Compass } from 'lucide-react';
 
 function timeAgo(dateString) {
+  if (!dateString) return 'recently';
   const now = new Date();
   const date = new Date(dateString);
+  if (isNaN(date.getTime())) return 'recently';
   const seconds = Math.floor((now - date) / 1000);
   
   if (seconds < 60) return 'just now';
@@ -16,6 +18,34 @@ function timeAgo(dateString) {
   if (hours < 24) return `${hours}h ago`;
   const days = Math.floor(hours / 24);
   return `${days}d ago`;
+}
+
+const GITHUB_CACHE_KEY = 'github_commits_cache_v2';
+const GITHUB_CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+
+function getCachedGitHubData() {
+  try {
+    const raw = localStorage.getItem(GITHUB_CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && Array.isArray(parsed.data) && parsed.data.length > 0) {
+      return parsed;
+    }
+  } catch {
+    // Ignore storage parse errors
+  }
+  return null;
+}
+
+function setCachedGitHubData(data) {
+  try {
+    localStorage.setItem(GITHUB_CACHE_KEY, JSON.stringify({
+      timestamp: Date.now(),
+      data
+    }));
+  } catch {
+    // Ignore storage errors (quota, permissions, private browsing)
+  }
 }
 
 // Import project screenshots
@@ -37,75 +67,130 @@ export function BentoGrid({ onContactClick }) {
   useEffect(() => {
     let isMounted = true;
     async function fetchCommits() {
-      try {
-        const cacheKey = 'github_commits_cache_v2';
-        const cached = localStorage.getItem(cacheKey);
-        if (cached) {
-          const { timestamp, data } = JSON.parse(cached);
-          if (Date.now() - timestamp < 900000) { // 15 mins
-            if (isMounted) {
-              setCommits(data);
-              setLoadingCommits(false);
-            }
-            return;
-          }
-        }
-
-        const eventsRes = await fetch('https://api.github.com/users/Aum3136/events');
-        if (!eventsRes.ok) throw new Error('Events API error');
-        const events = await eventsRes.json();
-        
-        const pushEvents = events.filter(e => e.type === 'PushEvent').slice(0, 5);
-        if (pushEvents.length === 0) {
-          throw new Error('No push events found');
-        }
-
-        const commitPromises = pushEvents.map(async (event) => {
-          const repoName = event.repo.name;
-          const headSha = event.payload.head;
-          const cleanRepo = repoName.replace('Aum3136/', '');
-          
-          try {
-            const commitRes = await fetch(`https://api.github.com/repos/${repoName}/commits/${headSha}`);
-            if (!commitRes.ok) {
-              return {
-                repo: cleanRepo,
-                message: 'Pushed updates to main',
-                time: timeAgo(event.created_at)
-              };
-            }
-            const commitData = await commitRes.json();
-            return {
-              repo: cleanRepo,
-              message: commitData.commit.message.split('\n')[0],
-              time: timeAgo(event.created_at)
-            };
-          } catch (e) {
-            return {
-              repo: cleanRepo,
-              message: 'Pushed updates to main',
-              time: timeAgo(event.created_at)
-            };
-          }
-        });
-
-        const fetchedCommits = await Promise.all(commitPromises);
+      // Check cache first (fresh for 30 minutes)
+      const cached = getCachedGitHubData();
+      if (cached && Date.now() - cached.timestamp < GITHUB_CACHE_TTL) {
         if (isMounted) {
-          setCommits(fetchedCommits);
-          localStorage.setItem(cacheKey, JSON.stringify({
-            timestamp: Date.now(),
-            data: fetchedCommits
-          }));
+          setCommits(cached.data);
+          setLoadingCommits(false);
+        }
+        return;
+      }
+
+      let activityData = null;
+
+      try {
+        // TIER 1: Fetch public events and filter PushEvent (last 5 commits)
+        try {
+          const eventsRes = await fetch('https://api.github.com/users/Aum3136/events/public');
+          if (eventsRes.ok) {
+            const events = await eventsRes.json();
+            if (Array.isArray(events)) {
+              const pushEvents = events.filter((e) => e.type === 'PushEvent').slice(0, 5);
+              if (pushEvents.length > 0) {
+                const commitPromises = pushEvents.map(async (event) => {
+                  const repoName = event.repo?.name || '';
+                  const headSha = event.payload?.head;
+                  const cleanRepo = repoName.replace('Aum3136/', '');
+
+                  let message = 'Pushed updates to main';
+                  if (event.payload?.commits && event.payload.commits.length > 0) {
+                    const lastCommit = event.payload.commits[event.payload.commits.length - 1];
+                    if (lastCommit?.message) {
+                      message = lastCommit.message.split('\n')[0];
+                    }
+                  }
+
+                  if (headSha && repoName) {
+                    try {
+                      const commitRes = await fetch(`https://api.github.com/repos/${repoName}/commits/${headSha}`);
+                      if (commitRes.ok) {
+                        const commitData = await commitRes.json();
+                        if (commitData?.commit?.message) {
+                          message = commitData.commit.message.split('\n')[0];
+                        }
+                      }
+                    } catch {
+                      // Fallback to commit message from event payload or default
+                    }
+                  }
+
+                  return {
+                    repo: cleanRepo,
+                    message,
+                    time: timeAgo(event.created_at)
+                  };
+                });
+
+                activityData = await Promise.all(commitPromises);
+              }
+            }
+          } else if (eventsRes.status === 403) {
+            console.warn('GitHub events rate limit reached');
+          }
+        } catch (err) {
+          console.warn('Tier 1 GitHub events fetch failed:', err?.message || err);
+        }
+
+        // TIER 2 (new fallback, when Tier 1 has zero push events):
+        // fetch https://api.github.com/users/Aum3136/repos?sort=pushed&per_page=5
+        // and display each repo as a row in the same terminal-log style:
+        //   [repo-name] last pushed · Xd ago  (from pushed_at)
+        if (!activityData || activityData.length === 0) {
+          try {
+            const reposRes = await fetch('https://api.github.com/users/Aum3136/repos?sort=pushed&per_page=5');
+            if (reposRes.ok) {
+              const repos = await reposRes.json();
+              if (Array.isArray(repos) && repos.length > 0) {
+                activityData = repos.slice(0, 5).map((repo) => {
+                  const cleanRepo = repo.name ? repo.name.replace('Aum3136/', '') : '';
+                  return {
+                    repo: cleanRepo,
+                    message: 'last pushed',
+                    time: timeAgo(repo.pushed_at || repo.updated_at)
+                  };
+                });
+              }
+            } else if (reposRes.status === 403) {
+              console.warn('GitHub repos rate limit reached');
+            }
+          } catch (err) {
+            console.warn('Tier 2 GitHub repos fetch failed:', err?.message || err);
+          }
+        }
+
+        // Cache and set successful result from Tier 1 or Tier 2
+        if (activityData && activityData.length > 0) {
+          setCachedGitHubData(activityData);
+          if (isMounted) {
+            setCommits(activityData);
+            setCommitError(false);
+          }
+        } else {
+          // TIER 3 / Cache fallback: If both tiers failed or empty, use cached data if present
+          const fallbackCached = cached || getCachedGitHubData();
+          if (fallbackCached && fallbackCached.data && fallbackCached.data.length > 0) {
+            if (isMounted) {
+              setCommits(fallbackCached.data);
+              setCommitError(false);
+            }
+          } else {
+            if (isMounted) {
+              setCommits([]);
+              setCommitError(false);
+            }
+          }
         }
       } catch (err) {
-        console.error('Error fetching GitHub activity:', err);
+        console.warn('GitHub activity fetch error:', err?.message || err);
         if (isMounted) {
-          setCommitError(true);
-          const cached = localStorage.getItem('github_commits_cache_v2');
-          if (cached) {
-            const { data } = JSON.parse(cached);
-            setCommits(data);
+          const fallbackCached = cached || getCachedGitHubData();
+          if (fallbackCached && fallbackCached.data && fallbackCached.data.length > 0) {
+            setCommits(fallbackCached.data);
             setCommitError(false);
+          } else {
+            setCommits([]);
+            setCommitError(true);
           }
         }
       } finally {

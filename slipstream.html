@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
       --color-oatmeal: #f5f0e8;
       --color-terracotta: #c1502a;
       --color-charcoal: #1e1e1e;
-      
+
       --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-mono: 'Courier New', Courier, monospace;
@@ -194,7 +195,8 @@
       flex-wrap: wrap;
     }
 
-    .cta-primary, .cta-secondary {
+    .cta-primary,
+    .cta-secondary {
       font-family: var(--font-mono);
       font-size: 0.9rem;
       font-weight: bold;
@@ -615,48 +617,60 @@
       header {
         padding: 1.5rem 0;
       }
+
       .nav-wrapper {
         flex-direction: column;
         align-items: flex-start;
       }
+
       nav {
         width: 100%;
         justify-content: space-between;
         gap: 1rem;
         flex-wrap: wrap;
       }
+
       .hero-title {
         font-size: 2.75rem;
       }
+
       .hero-tagline {
         font-size: 1.1rem;
       }
+
       section.details-section {
         padding: 4rem 0;
       }
+
       .section-heading {
         font-size: 2.25rem;
         margin-bottom: 2rem;
       }
+
       .problem-layout {
         flex-direction: column;
         gap: 2.5rem;
       }
+
       .stat-block {
         padding: 1.75rem;
       }
+
       .pipeline-grid {
         flex-direction: column;
         min-width: unset;
         width: 100%;
         padding: 1.5rem 1rem;
       }
+
       .pipeline-arrow {
         display: none;
       }
+
       .pipeline-arrow-mobile {
         display: block;
       }
+
       .footer-links {
         flex-direction: column;
         align-items: flex-start;
@@ -666,6 +680,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Header Nav -->
@@ -689,30 +704,35 @@
   <section class="hero-section">
     <div class="container">
       <span class="hero-label">PROJECT DEEP DIVE // 03</span>
-      
+
       <div class="hero-badge-row">
         <span class="hero-badge">⚡ LLM INFRASTRUCTURE & ROUTING</span>
       </div>
 
       <h1 class="hero-title">Slipstream Gateway</h1>
-      
+
       <p class="hero-tagline">
-        Middleware sitting between applications and multiple LLM providers (Groq, Gemini, local Ollama) to drastically reduce latency and cost while guaranteeing high availability.
+        Middleware sitting between applications and multiple LLM providers (Groq, Gemini, local Ollama) to drastically
+        reduce latency and cost while guaranteeing high availability.
       </p>
 
       <div class="hero-teammate-note">
-        Co-authored project built with teammate <strong>Naitik Lavri</strong>. My ownership: Semantic cache core, intelligent model router, and fallback/circuit-breaker engine. Teammate owned: Observability dashboard and guardrails screening layer.
+        Co-authored project built with teammate <strong>Naitik Lavri</strong>. My ownership: Semantic cache core,
+        intelligent model router, and fallback/circuit-breaker engine. Teammate owned: Observability dashboard and
+        guardrails screening layer.
       </div>
 
       <div class="hero-ctas">
-        <a href="https://github.com/Aum3136/slipstream-gateway" target="_blank" rel="noopener noreferrer" class="cta-primary">VIEW GITHUB REPO →</a>
+        <a href="https://github.com/Aum3136/slipstream-gateway" target="_blank" rel="noopener noreferrer"
+          class="cta-primary">VIEW GITHUB REPO →</a>
         <a href="#overview-dashboard" class="cta-secondary">EXPLORE DASHBOARD ↓</a>
       </div>
 
       <div class="stack-tags-row">
         <span class="stack-label">TECHNOLOGY STACK</span>
         <div class="stack-tags">
-          FASTAPI · CHROMADB · REDIS (+FAKEREDIS) · SENTENCE-TRANSFORMERS · GROQ API · GEMINI API · OLLAMA (LOCAL) · SQLITE · DOCKER COMPOSE · STREAMLIT
+          FASTAPI · CHROMADB · REDIS (+FAKEREDIS) · SENTENCE-TRANSFORMERS · GROQ API · GEMINI API · OLLAMA (LOCAL) ·
+          SQLITE · DOCKER COMPOSE · STREAMLIT
         </div>
       </div>
     </div>
@@ -723,17 +743,23 @@
     <div class="container">
       <span class="section-label">// 01 · THE PROBLEM</span>
       <h2 class="section-heading">Direct LLM API calls overpay and break easily.</h2>
-      
+
       <div class="problem-layout">
         <div class="problem-text">
           <p>
-            Teams connecting software directly to LLM providers face three structural flaws: they pay full rate for every single API request (even identical or near-duplicate prompts), have zero automatic failover when a provider is rate-limited (HTTP 429) or offline (HTTP 503), and send every prompt to the exact same heavy model regardless of request complexity.
+            Teams connecting software directly to LLM providers face three structural flaws: they pay full rate for
+            every single API request (even identical or near-duplicate prompts), have zero automatic failover when a
+            provider is rate-limited (HTTP 429) or offline (HTTP 503), and send every prompt to the exact same heavy
+            model regardless of request complexity.
           </p>
           <p>
-            Slipstream Gateway acts as intelligent, resilient middleware. By intercepting outgoing requests before hitting upstream APIs, it enforces zero-cost screening, vector similarity cache retrieval, tier-based model allocation, and per-provider circuit breaking without the application needing to know which provider served the response.
+            Slipstream Gateway acts as intelligent, resilient middleware. By intercepting outgoing requests before
+            hitting upstream APIs, it enforces zero-cost screening, vector similarity cache retrieval, tier-based model
+            allocation, and per-provider circuit breaking without the application needing to know which provider served
+            the response.
           </p>
         </div>
-        
+
         <div class="stat-block">
           <div class="stat-item">
             <span class="stat-number">3 - 4 ms</span>
@@ -758,7 +784,8 @@
       <span class="section-label">// 02 · SYSTEM ARCHITECTURE</span>
       <h2 class="section-heading">5-Stage Left-to-Right Request Pipeline.</h2>
       <p style="max-width: 800px; opacity: 0.9; font-size: 1.05rem; margin-bottom: 2rem;">
-        Requests flow left-to-right through cheapest checks first. Bad requests get filtered at zero cost, cached answers return in single-digit milliseconds, and live requests route to the cheapest viable model.
+        Requests flow left-to-right through cheapest checks first. Bad requests get filtered at zero cost, cached
+        answers return in single-digit milliseconds, and live requests route to the cheapest viable model.
       </p>
 
       <div class="pipeline-wrapper">
@@ -770,7 +797,8 @@
               <div class="stage-name">Guardrails</div>
             </div>
             <div class="stage-desc">
-              Regex-based PII screening & prompt-injection filtering. Blocks malicious or invalid payloads before touching any model (0 cost).
+              Regex-based PII screening & prompt-injection filtering. Blocks malicious or invalid payloads before
+              touching any model (0 cost).
             </div>
           </div>
 
@@ -784,7 +812,8 @@
               <div class="stage-name">Semantic Cache</div>
             </div>
             <div class="stage-desc">
-              Embeds prompt with sentence-transformers (all-MiniLM-L6-v2), searches ChromaDB at 0.80 cosine threshold, serves cached answer from Redis.
+              Embeds prompt with sentence-transformers (all-MiniLM-L6-v2), searches ChromaDB at 0.80 cosine threshold,
+              serves cached answer from Redis.
             </div>
           </div>
 
@@ -798,7 +827,8 @@
               <div class="stage-name">Model Router</div>
             </div>
             <div class="stage-desc">
-              Classifies prompts into Simple / Medium / Complex based on length & content signals, routing easy queries to fast/cheap models.
+              Classifies prompts into Simple / Medium / Complex based on length & content signals, routing easy queries
+              to fast/cheap models.
             </div>
           </div>
 
@@ -812,7 +842,8 @@
               <div class="stage-name">Fallback Engine</div>
             </div>
             <div class="stage-desc">
-              Walks ordered provider chain per tier (e.g., Groq → Gemini Flash → Gemini Pro) with per-provider circuit breakers & 30s cooldowns.
+              Walks ordered provider chain per tier (e.g., Groq → Gemini Flash → Gemini Pro) with per-provider circuit
+              breakers & 30s cooldowns.
             </div>
           </div>
 
@@ -826,7 +857,8 @@
               <div class="stage-name">Observability</div>
             </div>
             <div class="stage-desc">
-              Logs tier, provider, latency, cost, and hit/miss to SQLite. Dashboard visualizes real-time request feed and cost metrics.
+              Logs tier, provider, latency, cost, and hit/miss to SQLite. Dashboard visualizes real-time request feed
+              and cost metrics.
             </div>
           </div>
         </div>
@@ -839,7 +871,7 @@
     <div class="container">
       <span class="section-label">// 03 · WHAT I ACTUALLY BUILT</span>
       <h2 class="section-heading">Core engineering & architectural decisions.</h2>
-      
+
       <div class="cards-grid">
         <!-- Card 1 -->
         <div class="challenge-card">
@@ -847,10 +879,13 @@
           <h3 class="card-title">Two-Store Cache Architecture</h3>
           <div class="card-body">
             <p>
-              Separated vector indexing from payload storage: <strong>ChromaDB</strong> manages high-dimensional vector similarity indexing while <strong>Redis</strong> stores raw response completion payloads.
+              Separated vector indexing from payload storage: <strong>ChromaDB</strong> manages high-dimensional vector
+              similarity indexing while <strong>Redis</strong> stores raw response completion payloads.
             </p>
             <p>
-              Vector databases are optimized for nearest-neighbor search rather than large blob key-value storage. By indexing vector embeddings in ChromaDB and storing response blobs in Redis, query lookup and retrieval remain ultra-fast at scale.
+              Vector databases are optimized for nearest-neighbor search rather than large blob key-value storage. By
+              indexing vector embeddings in ChromaDB and storing response blobs in Redis, query lookup and retrieval
+              remain ultra-fast at scale.
             </p>
           </div>
         </div>
@@ -861,10 +896,12 @@
           <h3 class="card-title">Zero-Dependency Graceful Degradation</h3>
           <div class="card-body">
             <p>
-              Built dual fallback mechanisms for local execution resilience: if <code>sentence-transformers</code> model weights cannot download, the pipeline switches to an offline hashing-based embedder.
+              Built dual fallback mechanisms for local execution resilience: if <code>sentence-transformers</code> model
+              weights cannot download, the pipeline switches to an offline hashing-based embedder.
             </p>
             <p>
-              If a Redis server is unreachable, the system seamlessly falls back to an in-memory <code>fakeredis</code> instance. The entire 5-stage pipeline can run locally with zero external network or service dependencies.
+              If a Redis server is unreachable, the system seamlessly falls back to an in-memory <code>fakeredis</code>
+              instance. The entire 5-stage pipeline can run locally with zero external network or service dependencies.
             </p>
           </div>
         </div>
@@ -875,10 +912,13 @@
           <h3 class="card-title">Per-Provider Circuit Breaker Pattern</h3>
           <div class="card-body">
             <p>
-              Implemented explicit finite state machine states (Closed, Open, Half-Open) evaluated individually per provider tier rather than globally across the gateway.
+              Implemented explicit finite state machine states (Closed, Open, Half-Open) evaluated individually per
+              provider tier rather than globally across the gateway.
             </p>
             <p>
-              When a provider hits consecutive rate limits (3 failures), its circuit opens for a 30-second cooldown period. Because breaker state is scoped per-provider, a dead provider (e.g. Groq 429) never blocks traffic from routing to healthy alternatives (e.g. Gemini or local Ollama).
+              When a provider hits consecutive rate limits (3 failures), its circuit opens for a 30-second cooldown
+              period. Because breaker state is scoped per-provider, a dead provider (e.g. Groq 429) never blocks traffic
+              from routing to healthy alternatives (e.g. Gemini or local Ollama).
             </p>
           </div>
         </div>
@@ -889,10 +929,12 @@
           <h3 class="card-title">Deterministic Offline Mock Mode</h3>
           <div class="card-body">
             <p>
-              Architected a full offline mock mode where the complete 5-stage pipeline runs end-to-end with zero API keys using deterministic fake completions.
+              Architected a full offline mock mode where the complete 5-stage pipeline runs end-to-end with zero API
+              keys using deterministic fake completions.
             </p>
             <p>
-              This allows developers to build, test, and run CI integration suites without incurring upstream API charges or requiring internet connectivity.
+              This allows developers to build, test, and run CI integration suites without incurring upstream API
+              charges or requiring internet connectivity.
             </p>
           </div>
         </div>
@@ -905,11 +947,13 @@
     <div class="container">
       <span class="section-label">// 04 · REAL DASHBOARD PREVIEW</span>
       <h2 class="section-heading">Live request feed & observability dashboard.</h2>
-      
+
       <div class="dashboard-preview-card">
         <img src="/slipstream_mockup.png" alt="Slipstream Gateway Overview Dashboard Mockup" />
         <div class="dashboard-caption">
-          <strong>Overview Dashboard Preview (localhost:3000):</strong> Displays real-time request feeds, tier classification badges (Simple / Medium / Complex), provider routing (Groq, Gemini Flash, local Ollama), 3-4ms cache hit response times vs 42-890ms live calls, and per-request cost monitoring down to $0.000009.
+          <strong>Overview Dashboard Preview (localhost:3000):</strong> Displays real-time request feeds, tier
+          classification badges (Simple / Medium / Complex), provider routing (Groq, Gemini Flash, local Ollama), 3-4ms
+          cache hit response times vs 42-890ms live calls, and per-request cost monitoring down to $0.000009.
         </div>
       </div>
     </div>
@@ -920,17 +964,20 @@
     <div class="container">
       <span class="section-label">// 05 · TECH STACK & HONEST SCOPE</span>
       <h2 class="section-heading">Engineering stack & project scope note.</h2>
-      
+
       <div class="stack-tags-row" style="border-top: none; padding-top: 0; margin-bottom: 2.5rem;">
         <span class="stack-label">COMPLETE STACK</span>
         <div class="stack-tags" style="font-size: 0.95rem;">
-          FASTAPI · CHROMADB · REDIS (+FAKEREDIS) · SENTENCE-TRANSFORMERS · GROQ API · GEMINI API · OLLAMA (LOCAL) · SQLITE · DOCKER COMPOSE · STREAMLIT
+          FASTAPI · CHROMADB · REDIS (+FAKEREDIS) · SENTENCE-TRANSFORMERS · GROQ API · GEMINI API · OLLAMA (LOCAL) ·
+          SQLITE · DOCKER COMPOSE · STREAMLIT
         </div>
       </div>
 
       <div class="scope-box">
         <div class="scope-box-header">HONEST SCOPE NOTE</div>
-        Router classification and guardrail detection are currently rule-based (regex/heuristics), not ML-trained — accurately described as LLM infrastructure/orchestration, not a machine learning project. Benchmarking against a no-gateway baseline is in progress.
+        Router classification and guardrail detection are currently rule-based (regex/heuristics), not ML-trained —
+        accurately described as LLM infrastructure/orchestration, not a machine learning project. Benchmarking against a
+        no-gateway baseline is in progress.
       </div>
     </div>
   </section>
@@ -945,25 +992,37 @@
         <li class="retro-item">
           <span class="retro-arrow">➔</span>
           <div>
-            <strong>"Infrastructure" doesn't mean "machine learning" at every layer:</strong> The router and guardrails run on regex and length heuristics, not trained models — and that's fine. The harder engineering call wasn't writing a classifier, it was deciding which layer actually needed one. A vector-similarity cache is a real ML problem worth solving with embeddings. Sorting a prompt into "simple vs complex" is not — a heuristic gets 90% of the value at 0% of the training cost.
+            <strong>"Infrastructure" doesn't mean "machine learning" at every layer:</strong> The router and guardrails
+            run on regex and length heuristics, not trained models — and that's fine. The harder engineering call wasn't
+            writing a classifier, it was deciding which layer actually needed one. A vector-similarity cache is a real
+            ML problem worth solving with embeddings. Sorting a prompt into "simple vs complex" is not — a heuristic
+            gets 90% of the value at 0% of the training cost.
           </div>
         </li>
         <li class="retro-item">
           <span class="retro-arrow">➔</span>
           <div>
-            <strong>A cache is only as good as its false-positive rate:</strong> The dangerous failure mode isn't a cache miss — it's a cache serving the wrong answer with full confidence because the similarity threshold was too loose. Tuning 0.80 cosine similarity meant testing genuine paraphrases against genuinely different questions, not just checking that identical prompts hit.
+            <strong>A cache is only as good as its false-positive rate:</strong> The dangerous failure mode isn't a
+            cache miss — it's a cache serving the wrong answer with full confidence because the similarity threshold was
+            too loose. Tuning 0.80 cosine similarity meant testing genuine paraphrases against genuinely different
+            questions, not just checking that identical prompts hit.
           </div>
         </li>
         <li class="retro-item">
           <span class="retro-arrow">➔</span>
           <div>
-            <strong>Free-tier providers force you to build resilience you'd otherwise skip:</strong> Building on Groq/Gemini/Ollama instead of OpenAI meant real rate limits and real outages during dev — which is exactly why the circuit breaker exists per-provider, not globally. One dead provider doesn't get to take down the other two.
+            <strong>Free-tier providers force you to build resilience you'd otherwise skip:</strong> Building on
+            Groq/Gemini/Ollama instead of OpenAI meant real rate limits and real outages during dev — which is exactly
+            why the circuit breaker exists per-provider, not globally. One dead provider doesn't get to take down the
+            other two.
           </div>
         </li>
         <li class="retro-item">
           <span class="retro-arrow">➔</span>
           <div>
-            <strong>Mock mode wasn't a shortcut — it was a design requirement:</strong> Being able to run the entire 5-stage pipeline with zero API keys meant the architecture had to be provider-agnostic from day one, not bolted on later. That constraint caught bugs in the fallback chain before a single real API call was made.
+            <strong>Mock mode wasn't a shortcut — it was a design requirement:</strong> Being able to run the entire
+            5-stage pipeline with zero API keys meant the architecture had to be provider-agnostic from day one, not
+            bolted on later. That constraint caught bugs in the fallback chain before a single real API call was made.
           </div>
         </li>
       </ul>
@@ -987,4 +1046,5 @@
   </footer>
 
 </body>
+
 </html>
